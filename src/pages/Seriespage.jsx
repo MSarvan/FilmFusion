@@ -1,8 +1,13 @@
 import React from 'react'
+import "../styles/homepage.scss";
+import Navbar from "../components/Navbar";
 
 const Seriespage = () => {
   return (
-    <div>Seriespage</div>
+    <div className="homepage-container">
+      <Navbar />
+      <div>Series page</div>
+    </div>
   )
 }
 
