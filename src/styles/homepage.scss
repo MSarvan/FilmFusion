@@ -4,5 +4,34 @@
   width: 100vw;
   height: 100vh;
   // border: 1px solid red;
-  overflow-y: scroll;
+  background-color: $background-color;
+
+  .content-area {
+    width: 100%;
+    height: calc(100% - 6rem);
+    // border: 1px solid red;
+    padding: 2rem 5rem;
+    color: $text-color;
+    overflow-y: scroll;
+
+    .caption {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+
+      .trend-icon {
+        display: flex;
+        font-size: 2rem;
+        color: $accent-color;
+      }
+    }
+
+    .cards-data {
+      width: 100%;
+      margin: 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+    }
+  }
 }
