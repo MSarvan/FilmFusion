@@ -4,9 +4,11 @@ import "../styles/homepage.scss";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import Card from "../components/Card";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
   const API_KEY = "693677a4";
+  const navigate = useNavigate();
 
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
@@ -34,6 +36,10 @@ const Homepage = () => {
     fetchSeries();
   }, []);
 
+  const handleClick = (id) => {
+    navigate(`/movies/${id}`)
+  }
+
   return (
     <div className="homepage-container">
       <Navbar />
@@ -52,6 +58,7 @@ const Homepage = () => {
                 poster={e?.Poster}
                 year={e?.Year}
                 index={e?.imdbID}
+                handleClick={() => handleClick(e?.imdbID)}
               />
             );
           })}
@@ -62,6 +69,7 @@ const Homepage = () => {
                 poster={e?.Poster}
                 year={e?.Year}
                 index={e?.imdbID}
+                handleClick={() => handleClick(e?.imdbID)}
               />
             );
           })}

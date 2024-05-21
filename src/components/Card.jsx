@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/card.scss";
 
-const Card = ({ title, poster, year, index }) => {
+const Card = ({ title, poster, year, index, handleClick }) => {
   return (
     <div className="each-card" key={index}>
       <div className="img-box">
@@ -10,7 +10,9 @@ const Card = ({ title, poster, year, index }) => {
       <div className="movie-title">{title}</div>
       <div className="year">{year}</div>
       <div className="info-div">
-        <div className="info-button">More Info..</div>
+        <div className="info-button" onClick={handleClick}>
+          More Info..
+        </div>
       </div>
     </div>
   );
