@@ -4,4 +4,38 @@
   width: 100vw;
   height: 100vh;
   border: 1px solid red;
+  background-color: $background-color;
+
+  .movieinfo-content-area {
+    width: 100%;
+    height: calc(100% - 6rem);
+    // border: 1px solid red;
+    padding: 2rem 5rem;
+    color: $text-color;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: space-between;
+
+    .left-area {
+      width: 40%;
+      height: 100%;
+      border: 1px solid;
+    }
+
+    .right-area {
+      width: 55%;
+      height: 100%;
+      border: 1px solid;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .seperator-div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+  }
 }
