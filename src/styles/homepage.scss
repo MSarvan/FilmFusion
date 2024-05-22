@@ -1,4 +1,4 @@
-@import './variables';
+@import "./variables";
 
 .homepage-container {
   width: 100vw;
@@ -33,5 +33,26 @@
       flex-wrap: wrap;
       gap: 3rem;
     }
+
+    .pagination-controls-visible {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding: 2rem;
+      align-items: center;
+
+      button {
+        color: $text-color;
+        background-color: $secondary-color;
+        border-radius: 10px;
+        border: none;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .pagination-controls-disable {
+    display: none;
   }
 }
