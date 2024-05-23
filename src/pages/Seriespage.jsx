@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/homepage.scss";
 import Navbar from "../components/Navbar";
 import axios from "axios";
@@ -6,11 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import Card from "../components/Card";
 import Loadingcard from "../components/Loadingcard";
+import { MainContext } from "../context/MainContext";
 
 const Seriespage = () => {
   const API_KEY = "693677a4";
   const navigate = useNavigate();
 
+  const { seriesId, setSeriesId } = useContext(MainContext);
   const [seriesData, setSeriesData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -28,9 +30,12 @@ const Seriespage = () => {
     const fetchSeries = async () => {
       setIsLoading(true);
       try {
-        const seriesResponsePage1 = await fetchData('series', page);
-        const seriesResponsePage2 = await fetchData('series', page + 1);
-        setSeriesData([...seriesResponsePage1.Search, ...seriesResponsePage2.Search]);
+        const seriesResponsePage1 = await fetchData("series", page);
+        const seriesResponsePage2 = await fetchData("series", page + 1);
+        setSeriesData([
+          ...seriesResponsePage1.Search,
+          ...seriesResponsePage2.Search,
+        ]);
 
         const totalResults = seriesResponsePage1.totalResults;
         setTotalPages(Math.ceil(totalResults / itemsPerPage));
@@ -42,10 +47,11 @@ const Seriespage = () => {
     };
 
     fetchSeries();
-  }, [page])
+  }, [page]);
 
   const handleClick = (id) => {
     navigate(`/movies/${id}`);
+    setSeriesId(id);
   };
 
   return (
@@ -60,9 +66,11 @@ const Seriespage = () => {
         </div>
         <div className="cards-data">
           {isLoading
-            ? Array(8).fill("").map((e, i) => {
-                return <Loadingcard index={i} />;
-              })
+            ? Array(8)
+                .fill("")
+                .map((e, i) => {
+                  return <Loadingcard index={i} />;
+                })
             : seriesData?.map((e, i) => {
                 return (
                   <Card
@@ -75,7 +83,13 @@ const Seriespage = () => {
                 );
               })}
         </div>
-        <div className={isLoading ? 'pagination-controls-disable' : 'pagination-controls-visible'}>
+        <div
+          className={
+            isLoading
+              ? "pagination-controls-disable"
+              : "pagination-controls-visible"
+          }
+        >
           <button onClick={() => setPage(page > 1 ? page - 1 : 1)}>
             Previous
           </button>
@@ -84,7 +98,7 @@ const Seriespage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Seriespage
+export default Seriespage;

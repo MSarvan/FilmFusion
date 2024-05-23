@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/homepage.scss";
 import Navbar from "../components/Navbar";
 import axios from "axios";
@@ -6,11 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import Card from "../components/Card";
 import Loadingcard from "../components/Loadingcard";
+import { MainContext } from "../context/MainContext";
 
 const Moviespage = () => {
   const API_KEY = "693677a4";
   const navigate = useNavigate();
 
+  const { movieId, setMovieId } = useContext(MainContext);
   const [movieData, setMovieData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -49,6 +51,8 @@ const Moviespage = () => {
 
   const handleClick = (id) => {
     navigate(`/movies/${id}`);
+    setMovieId(id);
+    localStorage.setItem('movie id', id);
   };
 
   return (
@@ -63,9 +67,11 @@ const Moviespage = () => {
         </div>
         <div className="cards-data">
           {isLoading
-            ? Array(8).fill("").map((e, i) => {
-                return <Loadingcard index={i} />;
-              })
+            ? Array(8)
+                .fill("")
+                .map((e, i) => {
+                  return <Loadingcard index={i} />;
+                })
             : movieData?.map((e, i) => {
                 return (
                   <Card
@@ -78,7 +84,13 @@ const Moviespage = () => {
                 );
               })}
         </div>
-        <div className={isLoading ? 'pagination-controls-disable' : 'pagination-controls-visible'}>
+        <div
+          className={
+            isLoading
+              ? "pagination-controls-disable"
+              : "pagination-controls-visible"
+          }
+        >
           <button onClick={() => setPage(page > 1 ? page - 1 : 1)}>
             Previous
           </button>

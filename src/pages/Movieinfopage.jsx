@@ -1,24 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/movieinfopage.scss";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { MainContext } from "../context/MainContext";
 
 const Movieinfopage = () => {
   const API_KEY = "693677a4";
-  const { pathname } = useLocation();
+  const { movieId, setMovieId } = useContext(MainContext);
   const [movieInfo, setMovieInfo] = useState([]);
-  const [id, setId] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let id = localStorage.getItem('movie id');
+    setMovieId(id);
+  }, [])
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       setIsLoading(true);
-      if (id) {
+      if (movieId) {
         const response = await axios.get(
-          `http://www.omdbapi.com/?i=${id}&apikey=${API_KEY}`
+          `http://www.omdbapi.com/?i=${movieId}&apikey=${API_KEY}`
         );
         setMovieInfo(response?.data);
         setIsLoading(false);
@@ -26,20 +31,7 @@ const Movieinfopage = () => {
     };
 
     fetchMovieDetails();
-  }, [id]);
-
-  const extractIdFromPathname = () => {
-    if (pathname) {
-      const temp = pathname.split("/").pop();
-      if (temp !== "") {
-        setId(temp);
-      }
-    }
-  };
-
-  useEffect(() => {
-    extractIdFromPathname();
-  }, [pathname]);
+  }, [movieId]);
 
   const handleClick = (title) => {
     window.open(
@@ -55,8 +47,8 @@ const Movieinfopage = () => {
         {isLoading ? (
           <>
             <div className="left-area">
-              <div style={{width:'100%', height: '100%'}}>
-              <Skeleton width={"100%"} height={"100%"} />
+              <div style={{ width: "100%", height: "100%" }}>
+                <Skeleton width={"100%"} height={"100%"} />
               </div>
             </div>
             <div className="right-area">
@@ -115,7 +107,7 @@ const Movieinfopage = () => {
                   <Skeleton width={300} height={30} />
                 </div>
               </div>
-              
+
               <div className="plot-div">
                 <div style={{ width: "100%" }}>
                   <Skeleton width={"100%"} height={40} />
