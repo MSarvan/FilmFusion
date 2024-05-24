@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/homepage.scss";
 import { FaStar } from "react-icons/fa";
@@ -6,10 +6,12 @@ import axios from "axios";
 import Card from "../components/Card";
 import { useNavigate } from "react-router-dom";
 import Loadingcard from "../components/Loadingcard";
+import { MainContext } from "../context/MainContext";
 
 const Homepage = () => {
   const API_KEY = "693677a4";
   const navigate = useNavigate();
+  const { movieId, setMovieId, seriesId, setSeriesId } = useContext(MainContext);
 
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
@@ -43,8 +45,16 @@ const Homepage = () => {
     fetchSeries();
   }, []);
 
-  const handleClick = (id) => {
+  const handleClickMovies = (id) => {
     navigate(`/movies/${id}`);
+    setMovieId(id);
+    localStorage.setItem('movie id', id);
+  };
+
+  const handleClickSeries = (id) => {
+    navigate(`/series/${id}`);
+    setSeriesId(id);
+    localStorage.setItem('series id', id);
   };
 
   return (
@@ -73,7 +83,7 @@ const Homepage = () => {
                     poster={e?.Poster}
                     year={e?.Year}
                     index={e?.imdbID}
-                    handleClick={() => handleClick(e?.imdbID)}
+                    handleClick={() => handleClickMovies(e?.imdbID)}
                   />
                 );
               })}
@@ -84,7 +94,7 @@ const Homepage = () => {
                     poster={e?.Poster}
                     year={e?.Year}
                     index={e?.imdbID}
-                    handleClick={() => handleClick(e?.imdbID)}
+                    handleClick={() => handleClickSeries(e?.imdbID)}
                   />
                 );
               })}
