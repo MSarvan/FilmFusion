@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "../styles/homepage.scss";
 import Navbar from "../components/Navbar";
 import axios from "axios";
@@ -12,12 +12,14 @@ import { API_KEY } from "../constant";
 const Seriespage = () => {
   const navigate = useNavigate();
   const { setSeriesId } = useContext(MainContext);
-  
+
   const [seriesData, setSeriesData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 20;
   const [isLoading, setIsLoading] = useState(true);
+
+  const contentAreaRef = useRef(null);
 
   const fetchData = async (type, page) => {
     const response = await axios.get(
@@ -49,16 +51,25 @@ const Seriespage = () => {
     fetchSeries();
   }, [page]);
 
+  useEffect(() => {
+    if (contentAreaRef.current) {
+      contentAreaRef.current.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [page]);
+
   const handleClick = (id) => {
     navigate(`/series/${id}`);
     setSeriesId(id);
-    localStorage.setItem('series id', id);
+    localStorage.setItem("series id", id);
   };
 
   return (
     <div className="homepage-container">
       <Navbar />
-      <div className="content-area">
+      <div className="content-area" ref={contentAreaRef}>
         <div className="caption">
           <div className="trend-icon">
             <FaStar />
@@ -91,11 +102,19 @@ const Seriespage = () => {
               : "pagination-controls-visible"
           }
         >
-          <button onClick={() => setPage(page > 1 ? page - 1 : 1)}>
+          <button
+            onClick={() => setPage(page > 1 ? page - 1 : 1)}
+            disabled={page === 1}
+          >
             Previous
           </button>
           <span>{`Page ${page} of ${totalPages}`}</span>
-          <button onClick={() => setPage(page + 1)}>Next</button>
+          <button
+            onClick={() => setPage(page < totalPages ? page + 1 : totalPages)}
+            disabled={page === totalPages}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

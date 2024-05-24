@@ -11,7 +11,8 @@ import { MainContext } from "../context/MainContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { theme, setTheme, toggleTheme } = useContext(MainContext);
+  const { theme, toggleTheme, searchParam, setSearchParam } =
+    useContext(MainContext);
 
   return (
     <div className="navbar-container">
@@ -57,7 +58,7 @@ const Navbar = () => {
       <div
         className="nav-item"
         onClick={() => {
-          toggleTheme()
+          toggleTheme();
         }}
       >
         <div className="icon-div">
