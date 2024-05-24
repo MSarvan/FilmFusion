@@ -1,27 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Moviespage from "./pages/Moviespage";
 import Seriespage from "./pages/Seriespage";
 import Movieinfopage from "./pages/Movieinfopage";
 import Seriesinfopage from "./pages/Seriesinfopage";
+import { MainContext } from "./context/MainContext";
 
 function App() {
-  const [theme, setTheme] = useState("dark-mode");
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) =>
-      prevTheme === "dark-mode" ? "light-mode" : "dark-mode"
-    );
-  };
-
-  useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
+  const {theme } = useContext(MainContext);
 
   return (
     <div className={`App ${theme}`}>
-      <button onClick={toggleTheme}>Toggle Theme</button>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/movies" element={<Moviespage />} />

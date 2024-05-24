@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../styles/navbar.scss";
 import { FaVideo } from "react-icons/fa6";
 import { MdOndemandVideo } from "react-icons/md";
 import { SiSteelseries } from "react-icons/si";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { MdDarkMode } from "react-icons/md";
+import { MdLightMode } from "react-icons/md";
+import { MainContext } from "../context/MainContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { theme, setTheme, toggleTheme } = useContext(MainContext);
 
   return (
     <div className="navbar-container">
@@ -33,9 +37,12 @@ const Navbar = () => {
         </div>
         <div>MOVIES</div>
       </div>
-      <div className="nav-item" onClick={() => {
+      <div
+        className="nav-item"
+        onClick={() => {
           navigate("/series");
-        }}>
+        }}
+      >
         <div className="icon-div">
           <SiSteelseries />
         </div>
@@ -45,6 +52,16 @@ const Navbar = () => {
         <input type="text" placeholder="Search your favourites.." />
         <div className="icon-div">
           <FaSearch />
+        </div>
+      </div>
+      <div
+        className="nav-item"
+        onClick={() => {
+          toggleTheme()
+        }}
+      >
+        <div className="icon-div">
+          {theme === "light-mode" ? <MdDarkMode /> : <MdLightMode />}
         </div>
       </div>
     </div>

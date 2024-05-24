@@ -41,11 +41,12 @@
       align-items: center;
 
       button {
+        width: 7rem;
         color: var(--text-color);
         background-color: var(--secondary-color);
         border-radius: 10px;
         border: none;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0;
         cursor: pointer;
       }
     }
