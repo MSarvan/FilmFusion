@@ -7,12 +7,12 @@ import { FaStar } from "react-icons/fa";
 import Card from "../components/Card";
 import Loadingcard from "../components/Loadingcard";
 import { MainContext } from "../context/MainContext";
+import { API_KEY } from "../constant";
 
 const Seriespage = () => {
-  const API_KEY = "693677a4";
   const navigate = useNavigate();
-
-  const { seriesId, setSeriesId } = useContext(MainContext);
+  const { setSeriesId } = useContext(MainContext);
+  
   const [seriesData, setSeriesData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -52,6 +52,7 @@ const Seriespage = () => {
   const handleClick = (id) => {
     navigate(`/movies/${id}`);
     setSeriesId(id);
+    localStorage.setItem('series id', id);
   };
 
   return (

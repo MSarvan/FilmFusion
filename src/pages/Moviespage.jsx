@@ -7,12 +7,12 @@ import { FaStar } from "react-icons/fa";
 import Card from "../components/Card";
 import Loadingcard from "../components/Loadingcard";
 import { MainContext } from "../context/MainContext";
+import { API_KEY } from "../constant";
 
 const Moviespage = () => {
-  const API_KEY = "693677a4";
   const navigate = useNavigate();
-
-  const { movieId, setMovieId } = useContext(MainContext);
+  const { setMovieId } = useContext(MainContext);
+  
   const [movieData, setMovieData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);

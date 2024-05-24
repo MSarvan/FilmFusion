@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/movieinfopage.scss";
-import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { MainContext } from "../context/MainContext";
+import { API_KEY } from "../constant";
 
 const Movieinfopage = () => {
-  const API_KEY = "693677a4";
   const { movieId, setMovieId } = useContext(MainContext);
+  
   const [movieInfo, setMovieInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

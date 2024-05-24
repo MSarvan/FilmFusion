@@ -7,11 +7,11 @@ import Card from "../components/Card";
 import { useNavigate } from "react-router-dom";
 import Loadingcard from "../components/Loadingcard";
 import { MainContext } from "../context/MainContext";
+import { API_KEY } from "../constant";
 
 const Homepage = () => {
-  const API_KEY = "693677a4";
   const navigate = useNavigate();
-  const { movieId, setMovieId, seriesId, setSeriesId } = useContext(MainContext);
+  const { setMovieId, setSeriesId } = useContext(MainContext);
 
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
@@ -48,13 +48,13 @@ const Homepage = () => {
   const handleClickMovies = (id) => {
     navigate(`/movies/${id}`);
     setMovieId(id);
-    localStorage.setItem('movie id', id);
+    localStorage.setItem("movie id", id);
   };
 
   const handleClickSeries = (id) => {
     navigate(`/series/${id}`);
     setSeriesId(id);
-    localStorage.setItem('series id', id);
+    localStorage.setItem("series id", id);
   };
 
   return (
