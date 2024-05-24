@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import "./mixins";
 
 // :root {
 //   --font-color: #100F0D;
@@ -11,7 +12,8 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  color: var(--font-color);
+  color: var(--text-color);
+  background-color: var(--background-color);
   #root {
     height: 0;
     flex: 1;
@@ -25,6 +27,14 @@ body {
   }
 }
 
+body.dark-mode {
+  @include theme($primary-color-dark, $secondary-color-dark, $accent-color-dark, $text-color-dark, $background-color-dark);
+}
+
+body.light-mode {
+  @include theme($primary-color-light, $secondary-color-light, $accent-color-light, $text-color-light, $background-color-light);
+}
+
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -36,9 +46,3 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 4;
-  background: rgba(0, 0, 0, 0.8);
-}

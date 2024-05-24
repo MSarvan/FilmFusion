@@ -1,0 +1,15 @@
+@import "./variables";
+
+@mixin theme(
+  $primary-color,
+  $secondary-color,
+  $accent-color,
+  $text-color,
+  $background-color
+) {
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --accent-color: #{$accent-color};
+  --text-color: #{$text-color};
+  --background-color: #{$background-color};
+}

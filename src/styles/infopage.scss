@@ -1,15 +1,16 @@
 @import "./variables";
+@import "./mixins";
 
 .infopage-container {
   width: 100vw;
   height: 100vh;
-  background-color: $background-color;
+  background-color: var(--background-color);
 
   .info-content-area {
     width: 100%;
     height: calc(100% - 6rem);
     padding: 2rem 5rem;
-    color: $text-color;
+    color: var(--text-color);
     overflow-y: scroll;
     display: flex;
     justify-content: space-between;
@@ -81,15 +82,15 @@
         padding: 0.75rem 2rem;
         cursor: pointer;
         width: auto;
-        background-color: $secondary-color;
+        background-color: var(--secondary-color);
         text-align: center;
         border-radius: 10px;
         font-weight: 600;
         transition: all ease 0.4s;
 
         &:hover {
-          background-color: $accent-color;
-          color: $primary-color;
+          background-color: var(--accent-color);
+          color: var(--primary-color);
         }
       }
     }

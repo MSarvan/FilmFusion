@@ -1,10 +1,12 @@
 @import "./variables";
+@import "./mixins";
 
 .each-card {
   width: calc((100% - 9rem) / 4);
   border-radius: 10px;
   padding: 1rem;
-  border: 5px solid white;
+  border: 5px solid;
+  border-color: var(--primary-color);
 
   .img-box {
     height: 15rem;
@@ -47,16 +49,16 @@
 
     .info-button {
       padding: 0.5rem 1rem;
-      background: $secondary-color;
-      color: $background-color;
+      background: var(--secondary-color);
+      color: var(--text-color);
       border-radius: 10px;
       font-weight: 600;
       cursor: pointer;
       transition: all ease 0.4s;
 
       &:hover {
-        background-color: $accent-color;
-        color: $primary-color;
+        background-color: var(--accent-color);
+        color: var(--primary-color);
       }
     }
   }
