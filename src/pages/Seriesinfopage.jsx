@@ -23,7 +23,7 @@ const Seriesinfopage = () => {
       setIsLoading(true);
       if (seriesId) {
         const response = await axios.get(
-          `http://www.omdbapi.com/?i=${seriesId}&apikey=${API_KEY}`
+          `https://www.omdbapi.com/?i=${seriesId}&apikey=${API_KEY}`
         );
         setSeriesInfo(response?.data);
         setIsLoading(false);

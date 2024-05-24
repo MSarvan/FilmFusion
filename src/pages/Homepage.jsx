@@ -22,7 +22,7 @@ const Homepage = () => {
     const fetchMovies = async () => {
       setIsMoviesLoading(true);
       const response = await axios.get(
-        `http://www.omdbapi.com/?s=movie&type=movie&apikey=${API_KEY}`
+        `https://www.omdbapi.com/?s=movie&type=movie&apikey=${API_KEY}`
       );
       let result = response?.data?.Search;
       // console.log(result, 'movies data');
@@ -33,7 +33,7 @@ const Homepage = () => {
     const fetchSeries = async () => {
       setIsSeriesLoading(true);
       const response = await axios.get(
-        `http://www.omdbapi.com/?s=series&type=series&apikey=${API_KEY}`
+        `https://www.omdbapi.com/?s=series&type=series&apikey=${API_KEY}`
       );
       let result = response?.data?.Search;
       // console.log(result, 'series data');
