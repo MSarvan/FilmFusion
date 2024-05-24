@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import "../styles/movieinfopage.scss";
+import "../styles/infopage.scss";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -9,7 +9,7 @@ import { API_KEY } from "../constant";
 
 const Movieinfopage = () => {
   const { movieId, setMovieId } = useContext(MainContext);
-  
+
   const [movieInfo, setMovieInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,9 +41,9 @@ const Movieinfopage = () => {
   };
 
   return (
-    <div className="movieinfopage-container">
+    <div className="infopage-container">
       <Navbar />
-      <div className="movieinfo-content-area">
+      <div className="info-content-area">
         {isLoading ? (
           <>
             <div className="left-area">

@@ -50,7 +50,7 @@ const Seriespage = () => {
   }, [page]);
 
   const handleClick = (id) => {
-    navigate(`/movies/${id}`);
+    navigate(`/series/${id}`);
     setSeriesId(id);
     localStorage.setItem('series id', id);
   };
