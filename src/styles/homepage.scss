@@ -48,11 +48,16 @@
         border: none;
         padding: 0.5rem 0;
         cursor: pointer;
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
       }
     }
-  }
 
-  .pagination-controls-disable {
-    display: none;
+    .pagination-controls-disable {
+      display: none;
+    }
   }
 }
