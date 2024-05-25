@@ -11,7 +11,7 @@ import { API_KEY } from "../constant";
 
 const Moviespage = () => {
   const navigate = useNavigate();
-  const { setMovieId } = useContext(MainContext);
+  const { setMovieId, searchParam } = useContext(MainContext);
   
   const [movieData, setMovieData] = useState([]);
   const [page, setPage] = useState(1);

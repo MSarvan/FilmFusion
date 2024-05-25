@@ -56,6 +56,7 @@ const Navbar = () => {
           onChange={(e) => {
             setSearchParam(e.target.value);
           }}
+          value={searchParam}
         />
         <div className="icon-div">
           <FaSearch />
