@@ -80,7 +80,7 @@ const Moviespage = () => {
               ? "caption-disable"
               : isSearching
               ? "caption-disable"
-              : '"caption"'
+              : "caption"
           }
         >
           <div className="trend-icon">
@@ -89,27 +89,38 @@ const Moviespage = () => {
           <h2>TOP PICKS FOR YOU</h2>
         </div>
         <div className="cards-data">
-          {isLoading
-            ? Array(8)
-                .fill("")
-                .map((e, i) => {
-                  return <Loadingcard index={i} />;
+          {isLoading ? (
+            Array(8)
+              .fill("")
+              .map((e, i) => {
+                return <Loadingcard index={i} />;
+              })
+          ) : (
+            <>
+              {(isSearching ? filteredMovies : movieData)?.length > 0 ? (
+                (isSearching ? filteredMovies : movieData)?.map((e, i) => {
+                  return (
+                    <Card
+                      key={i}
+                      title={e?.Title}
+                      poster={e?.Poster}
+                      year={e?.Year}
+                      index={e?.imdbID}
+                      handleClick={() => handleClick(e?.imdbID)}
+                    />
+                  );
                 })
-            : movieData?.map((e, i) => {
-                return (
-                  <Card
-                    title={e?.Title}
-                    poster={e?.Poster}
-                    year={e?.Year}
-                    index={e?.imdbID}
-                    handleClick={() => handleClick(e?.imdbID)}
-                  />
-                );
-              })}
+              ) : (
+                <div className="no-results">No results found!</div>
+              )}
+            </>
+          )}
         </div>
         <div
           className={
             isLoading
+              ? "pagination-controls-disable"
+              : isSearching
               ? "pagination-controls-disable"
               : "pagination-controls-visible"
           }
