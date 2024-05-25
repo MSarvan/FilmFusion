@@ -4,6 +4,7 @@ import { FaVideo } from "react-icons/fa6";
 import { MdOndemandVideo } from "react-icons/md";
 import { SiSteelseries } from "react-icons/si";
 import { FaSearch } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
@@ -11,8 +12,21 @@ import { MainContext } from "../context/MainContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { theme, toggleTheme, searchParam, setSearchParam } =
-    useContext(MainContext);
+  const {
+    theme,
+    toggleTheme,
+    searchParam,
+    setSearchParam,
+    isSearching,
+    setIsSearching,
+  } = useContext(MainContext);
+
+  const handleSearch = () => {
+    setIsSearching(!isSearching);
+    if (isSearching && searchParam?.length > 0) {
+      setSearchParam("");
+    }
+  };
 
   return (
     <div className="navbar-container">
@@ -58,8 +72,8 @@ const Navbar = () => {
           }}
           value={searchParam}
         />
-        <div className="icon-div">
-          <FaSearch />
+        <div className="icon-div" onClick={handleSearch} style={{cursor: 'pointer'}}>
+          {isSearching ? <FaTimes /> : <FaSearch />}
         </div>
       </div>
       <div

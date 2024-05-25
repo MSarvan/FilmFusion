@@ -24,6 +24,10 @@
         color: var(--accent-color);
       }
     }
+    
+    .caption-disable {
+      display: none;
+    }
 
     .cards-data {
       width: 100%;

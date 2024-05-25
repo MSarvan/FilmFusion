@@ -11,7 +11,7 @@ import { API_KEY } from "../constant";
 
 const Homepage = () => {
   const navigate = useNavigate();
-  const { setMovieId, setSeriesId, searchParam, setSearchParam } =
+  const { setMovieId, setSeriesId, searchParam, setSearchParam, isSearching } =
     useContext(MainContext);
 
   const [movies, setMovies] = useState([]);
@@ -50,21 +50,38 @@ const Homepage = () => {
     navigate(`/movies/${id}`);
     setMovieId(id);
     localStorage.setItem("movie id", id);
-    setSearchParam('');
+    setSearchParam("");
   };
 
   const handleClickSeries = (id) => {
     navigate(`/series/${id}`);
     setSeriesId(id);
     localStorage.setItem("series id", id);
-    setSearchParam('');
+    setSearchParam("");
   };
+
+  const filteredMovies = movies?.filter((entry) =>
+    entry?.Title?.toLowerCase().includes(searchParam?.toLowerCase())
+  );
+  const filteredSeries = series?.filter((entry) =>
+    entry?.Title?.toLowerCase().includes(searchParam?.toLowerCase())
+  );
 
   return (
     <div className="homepage-container">
       <Navbar />
       <div className="content-area">
-        <div className="caption">
+        <div
+          className={
+            isMoviesLoading
+              ? "caption-disable"
+              : isSeriesLoading
+              ? "caption-disable"
+              : isSearching
+              ? "caption-disable"
+              : "caption"
+          }
+        >
           <div className="trend-icon">
             <FaStar />
           </div>
@@ -79,40 +96,32 @@ const Homepage = () => {
               })
           ) : (
             <>
-              {movies
-                ?.filter((entry) =>
-                  entry?.Title?.toLowerCase()?.includes(
-                    searchParam?.toLowerCase()
-                  )
-                )
-                .map((e, i) => {
+              {(isSearching
+                ? [...filteredMovies, ...filteredSeries]
+                : [...movies, ...series]
+              )?.length > 0 ? (
+                (isSearching
+                  ? [...filteredMovies, ...filteredSeries]
+                  : [...movies, ...series]
+                )?.map((e, i) => {
                   return (
                     <Card
+                      key={i}
                       title={e?.Title}
                       poster={e?.Poster}
                       year={e?.Year}
                       index={e?.imdbID}
-                      handleClick={() => handleClickMovies(e?.imdbID)}
+                      handleClick={() =>
+                        e.Type === "movie"
+                          ? handleClickMovies(e?.imdbID)
+                          : handleClickSeries(e?.imdbID)
+                      }
                     />
                   );
-                })}
-              {series
-                ?.filter((entry) =>
-                  entry?.Title?.toLowerCase()?.includes(
-                    searchParam?.toLowerCase()
-                  )
-                )
-                .map((e, i) => {
-                  return (
-                    <Card
-                      title={e?.Title}
-                      poster={e?.Poster}
-                      year={e?.Year}
-                      index={e?.imdbID}
-                      handleClick={() => handleClickSeries(e?.imdbID)}
-                    />
-                  );
-                })}
+                })
+              ) : (
+                <div className="no-results">No results found</div>
+              )}
             </>
           )}
         </div>
