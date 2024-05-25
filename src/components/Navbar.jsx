@@ -50,7 +50,13 @@ const Navbar = () => {
         <div>SERIES</div>
       </div>
       <div className="nav-item nav-input">
-        <input type="text" placeholder="Search your favourites.." />
+        <input
+          type="text"
+          placeholder="Search your favourites.."
+          onChange={(e) => {
+            setSearchParam(e.target.value);
+          }}
+        />
         <div className="icon-div">
           <FaSearch />
         </div>

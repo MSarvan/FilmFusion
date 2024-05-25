@@ -11,7 +11,8 @@ import { API_KEY } from "../constant";
 
 const Homepage = () => {
   const navigate = useNavigate();
-  const { setMovieId, setSeriesId } = useContext(MainContext);
+  const { setMovieId, setSeriesId, searchParam } =
+    useContext(MainContext);
 
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
@@ -76,28 +77,40 @@ const Homepage = () => {
               })
           ) : (
             <>
-              {movies?.map((e, i) => {
-                return (
-                  <Card
-                    title={e?.Title}
-                    poster={e?.Poster}
-                    year={e?.Year}
-                    index={e?.imdbID}
-                    handleClick={() => handleClickMovies(e?.imdbID)}
-                  />
-                );
-              })}
-              {series?.map((e, i) => {
-                return (
-                  <Card
-                    title={e?.Title}
-                    poster={e?.Poster}
-                    year={e?.Year}
-                    index={e?.imdbID}
-                    handleClick={() => handleClickSeries(e?.imdbID)}
-                  />
-                );
-              })}
+              {movies
+                ?.filter((entry) =>
+                  entry?.Title?.toLowerCase()?.includes(
+                    searchParam?.toLowerCase()
+                  )
+                )
+                .map((e, i) => {
+                  return (
+                    <Card
+                      title={e?.Title}
+                      poster={e?.Poster}
+                      year={e?.Year}
+                      index={e?.imdbID}
+                      handleClick={() => handleClickMovies(e?.imdbID)}
+                    />
+                  );
+                })}
+              {series
+                ?.filter((entry) =>
+                  entry?.Title?.toLowerCase()?.includes(
+                    searchParam?.toLowerCase()
+                  )
+                )
+                .map((e, i) => {
+                  return (
+                    <Card
+                      title={e?.Title}
+                      poster={e?.Poster}
+                      year={e?.Year}
+                      index={e?.imdbID}
+                      handleClick={() => handleClickSeries(e?.imdbID)}
+                    />
+                  );
+                })}
             </>
           )}
         </div>
