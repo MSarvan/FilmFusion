@@ -11,7 +11,7 @@ import { API_KEY } from "../constant";
 
 const Seriespage = () => {
   const navigate = useNavigate();
-  const { setSeriesId } = useContext(MainContext);
+  const { setSeriesId, searchParam, isSearching } = useContext(MainContext);
 
   const [seriesData, setSeriesData] = useState([]);
   const [page, setPage] = useState(1);
@@ -66,38 +66,61 @@ const Seriespage = () => {
     localStorage.setItem("series id", id);
   };
 
+  const filteredSeries = seriesData?.filter((entry) =>
+    entry?.Title?.toLowerCase().includes(searchParam?.toLowerCase())
+  );
+
   return (
     <div className="homepage-container">
       <Navbar />
       <div className="content-area" ref={contentAreaRef}>
-        <div className="caption">
+        <div
+          className={
+            isLoading
+              ? "caption-disable"
+              : isSearching
+              ? "caption-disable"
+              : "caption"
+          }
+        >
           <div className="trend-icon">
             <FaStar />
           </div>
           <h2>BINGE-WORTHY SERIES</h2>
         </div>
         <div className="cards-data">
-          {isLoading
-            ? Array(8)
-                .fill("")
-                .map((e, i) => {
-                  return <Loadingcard index={i} />;
+          {isLoading ? (
+            Array(8)
+              .fill("")
+              .map((e, i) => {
+                return <Loadingcard index={i} />;
+              })
+          ) : (
+            <>
+              {(isSearching ? filteredSeries : seriesData)?.length > 0 ? (
+                (isSearching ? filteredSeries : seriesData)?.map((e, i) => {
+                  return (
+                    <Card
+                      key={i}
+                      title={e?.Title}
+                      poster={e?.Poster}
+                      year={e?.Year}
+                      index={e?.imdbID}
+                      handleClick={() => handleClick(e?.imdbID)}
+                    />
+                  );
                 })
-            : seriesData?.map((e, i) => {
-                return (
-                  <Card
-                    title={e?.Title}
-                    poster={e?.Poster}
-                    year={e?.Year}
-                    index={e?.imdbID}
-                    handleClick={() => handleClick(e?.imdbID)}
-                  />
-                );
-              })}
+              ) : (
+                <div className="no-results">No results found!</div>
+              )}
+            </>
+          )}
         </div>
         <div
           className={
             isLoading
+              ? "pagination-controls-disable"
+              : isSearching
               ? "pagination-controls-disable"
               : "pagination-controls-visible"
           }
