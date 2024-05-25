@@ -120,7 +120,7 @@ const Homepage = () => {
                   );
                 })
               ) : (
-                <div className="no-results">No results found</div>
+                <div className="no-results">No results found!</div>
               )}
             </>
           )}

@@ -35,6 +35,14 @@
       display: flex;
       flex-wrap: wrap;
       gap: 3rem;
+
+      .no-results {
+        width: 100%;
+        text-align: center;
+        color: var(--text-color);
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
     }
 
     .pagination-controls-visible {
