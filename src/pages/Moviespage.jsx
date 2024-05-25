@@ -11,8 +11,8 @@ import { API_KEY } from "../constant";
 
 const Moviespage = () => {
   const navigate = useNavigate();
-  const { setMovieId, searchParam } = useContext(MainContext);
-  
+  const { setMovieId, searchParam, isSearching } = useContext(MainContext);
+
   const [movieData, setMovieData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -55,7 +55,7 @@ const Moviespage = () => {
     if (contentAreaRef.current) {
       contentAreaRef.current.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   }, [page]);
@@ -63,14 +63,26 @@ const Moviespage = () => {
   const handleClick = (id) => {
     navigate(`/movies/${id}`);
     setMovieId(id);
-    localStorage.setItem('movie id', id);
+    localStorage.setItem("movie id", id);
   };
+
+  const filteredMovies = movieData?.filter((entry) =>
+    entry?.Title?.toLowerCase().includes(searchParam?.toLowerCase())
+  );
 
   return (
     <div className="homepage-container">
       <Navbar />
       <div className="content-area" ref={contentAreaRef}>
-        <div className="caption">
+        <div
+          className={
+            isLoading
+              ? "caption-disable"
+              : isSearching
+              ? "caption-disable"
+              : '"caption"'
+          }
+        >
           <div className="trend-icon">
             <FaStar />
           </div>
@@ -102,11 +114,19 @@ const Moviespage = () => {
               : "pagination-controls-visible"
           }
         >
-          <button onClick={() => setPage(page > 1 ? page - 1 : 1)} disabled={page === 1}>
+          <button
+            onClick={() => setPage(page > 1 ? page - 1 : 1)}
+            disabled={page === 1}
+          >
             Previous
           </button>
           <span>{`Page ${page} of ${totalPages}`}</span>
-          <button onClick={() => setPage(page < totalPages ? page + 1 : totalPages)} disabled={page === totalPages}>Next</button>
+          <button
+            onClick={() => setPage(page < totalPages ? page + 1 : totalPages)}
+            disabled={page === totalPages}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
