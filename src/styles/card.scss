@@ -79,13 +79,17 @@
 
 @media (max-width: 768px) {
   .each-card {
-    width: calc(100% - 2rem);
+    width: 100%;
+
+    .info-div {
+      margin-top: 1rem;
+    }
   }
 }
 
 @media (max-width: 576px) {
   .each-card {
-    width: calc(100% - 1rem);
+    width: 100%;
   }
 
   .img-box {
@@ -96,8 +100,12 @@
     height: auto;
   }
 
-  .info-button {
-    width: 100%;
-    text-align: center;
+  .info-div {
+    margin-top: 1rem;
+    
+    .info-button {
+      width: 100%;
+      text-align: center;
+    }
   }
 }

@@ -50,4 +50,38 @@
       border: 2px solid var(--secondary-color);
     }
   }
+
+  @media (max-width: 768px) {
+    display: none;
+    justify-content: space-between;
+    padding: 0 1rem;
+
+    .nav-input {
+      flex: 1;
+      margin-left: 1rem;
+    }
+
+    .hamburger-menu {
+      display: block;
+    }
+
+    .nav-items {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      top: 6rem;
+      left: 0;
+      background: var(--background-color);
+      padding: 1rem 0;
+
+      &.open {
+        display: flex;
+      }
+
+      .nav-item {
+        margin: 1rem 0;
+      }
+    }
+  }
 }
