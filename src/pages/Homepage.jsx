@@ -11,7 +11,7 @@ import { API_KEY } from "../constant";
 
 const Homepage = () => {
   const navigate = useNavigate();
-  const { setMovieId, setSeriesId, searchParam, setSearchParam, isSearching } =
+  const { setMovieId, setSeriesId, searchParam, setSearchParam, isSearching, setIsSearching } =
     useContext(MainContext);
 
   const [movies, setMovies] = useState([]);
@@ -51,6 +51,7 @@ const Homepage = () => {
     setMovieId(id);
     localStorage.setItem("movie id", id);
     setSearchParam("");
+    setIsSearching(false);
   };
 
   const handleClickSeries = (id) => {
@@ -58,6 +59,7 @@ const Homepage = () => {
     setSeriesId(id);
     localStorage.setItem("series id", id);
     setSearchParam("");
+    setIsSearching(false);
   };
 
   const filteredMovies = movies?.filter((entry) =>

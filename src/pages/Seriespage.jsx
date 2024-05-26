@@ -11,7 +11,7 @@ import { API_KEY } from "../constant";
 
 const Seriespage = () => {
   const navigate = useNavigate();
-  const { setSeriesId, searchParam, isSearching } = useContext(MainContext);
+  const { setSeriesId, searchParam, isSearching, setIsSearching } = useContext(MainContext);
 
   const [seriesData, setSeriesData] = useState([]);
   const [page, setPage] = useState(1);
@@ -63,6 +63,7 @@ const Seriespage = () => {
     navigate(`/series/${id}`);
     setSeriesId(id);
     localStorage.setItem("series id", id);
+    setIsSearching(false);
   };
 
   const filteredSeries = seriesData?.filter((entry) =>

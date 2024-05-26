@@ -11,7 +11,7 @@ import { API_KEY } from "../constant";
 
 const Moviespage = () => {
   const navigate = useNavigate();
-  const { setMovieId, searchParam, isSearching } = useContext(MainContext);
+  const { setMovieId, searchParam, isSearching, setIsSearching } = useContext(MainContext);
 
   const [movieData, setMovieData] = useState([]);
   const [page, setPage] = useState(1);
@@ -64,6 +64,7 @@ const Moviespage = () => {
     navigate(`/movies/${id}`);
     setMovieId(id);
     localStorage.setItem("movie id", id);
+    setIsSearching(false);
   };
 
   const filteredMovies = movieData?.filter((entry) =>
