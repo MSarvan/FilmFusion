@@ -96,4 +96,81 @@
       }
     }
   }
+
+  @media (max-width: 1200px) {
+    .info-content-area {
+      padding: 2rem 3rem;
+
+      .left-area {
+        width: 45%;
+      }
+
+      .right-area {
+        width: 50%;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .info-content-area {
+      padding: 2rem;
+
+      .left-area {
+        width: 100%;
+        height: auto;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      .right-area {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .info-content-area {
+      flex-direction: column;
+      align-items: center;
+
+      .left-area,
+      .right-area {
+        width: 100%;
+      }
+    }
+
+    .right-area {
+      padding-top: 1rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .info-content-area {
+      padding: 1rem;
+
+      .right-area {
+        gap: 1rem;
+
+        .seperator-div div {
+          width: 100%;
+          flex-direction: column;
+          gap: 5px;
+        }
+      }
+
+      .plot-div {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .ratings-div .reviewer-div div {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+  }
 }

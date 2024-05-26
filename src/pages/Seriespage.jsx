@@ -38,7 +38,6 @@ const Seriespage = () => {
           ...seriesResponsePage1.Search,
           ...seriesResponsePage2.Search,
         ]);
-
         const totalResults = seriesResponsePage1.totalResults;
         setTotalPages(Math.ceil(totalResults / itemsPerPage));
         setIsLoading(false);

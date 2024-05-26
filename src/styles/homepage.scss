@@ -72,4 +72,50 @@
       display: none;
     }
   }
+
+  @media (max-width: 992px) {
+    .content-area {
+      padding: 2rem 3rem;
+      .cards-data {
+        gap: 1.5rem;
+      }
+      .pagination-controls-visible {
+        padding: 1rem;
+        button {
+          width: 6rem;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .content-area {
+      padding: 2rem 2rem;
+      .cards-data {
+        gap: 1rem;
+      }
+      .pagination-controls-visible {
+        padding: 0.5rem;
+        button {
+          width: 5rem;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .content-area {
+      padding: 1rem 1rem;
+      .cards-data {
+        gap: 0.5rem;
+      }
+      .pagination-controls-visible {
+        flex-direction: column;
+        gap: 0.5rem;
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
 }
