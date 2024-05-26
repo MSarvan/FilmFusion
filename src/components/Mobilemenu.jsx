@@ -58,6 +58,7 @@ const Mobilemenu = () => {
         <div className="icon-div">
           {theme === "light-mode" ? <MdDarkMode /> : <MdLightMode />}
         </div>
+        <div>THEME</div>
       </div>
     </div>
   );
