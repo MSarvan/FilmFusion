@@ -8,11 +8,19 @@ import { useNavigate } from "react-router-dom";
 import Loadingcard from "../components/Loadingcard";
 import { MainContext } from "../context/MainContext";
 import { API_KEY } from "../constant";
+import Mobilemenu from "../components/Mobilemenu";
 
 const Homepage = () => {
   const navigate = useNavigate();
-  const { setMovieId, setSeriesId, searchParam, setSearchParam, isSearching, setIsSearching } =
-    useContext(MainContext);
+  const {
+    setMovieId,
+    setSeriesId,
+    searchParam,
+    setSearchParam,
+    isSearching,
+    setIsSearching,
+    isMenuOpen,
+  } = useContext(MainContext);
 
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
@@ -72,62 +80,66 @@ const Homepage = () => {
   return (
     <div className="homepage-container">
       <Navbar />
-      <div className="content-area">
-        <div
-          className={
-            isMoviesLoading
-              ? "caption-disable"
-              : isSeriesLoading
-              ? "caption-disable"
-              : isSearching
-              ? "caption-disable"
-              : "caption"
-          }
-        >
-          <div className="trend-icon">
-            <FaStar />
+      {isMenuOpen ? (
+        <Mobilemenu />
+      ) : (
+        <div className="content-area">
+          <div
+            className={
+              isMoviesLoading
+                ? "caption-disable"
+                : isSeriesLoading
+                ? "caption-disable"
+                : isSearching
+                ? "caption-disable"
+                : "caption"
+            }
+          >
+            <div className="trend-icon">
+              <FaStar />
+            </div>
+            <h2>TRENDING TODAY</h2>
           </div>
-          <h2>TRENDING TODAY</h2>
-        </div>
-        <div className="cards-data">
-          {isMoviesLoading || isSeriesLoading ? (
-            Array(8)
-              .fill("")
-              .map((e, i) => {
-                return <Loadingcard index={i} />;
-              })
-          ) : (
-            <>
-              {(isSearching
-                ? [...filteredMovies, ...filteredSeries]
-                : [...movies, ...series]
-              )?.length > 0 ? (
-                (isSearching
+          <div className="cards-data">
+            {isMoviesLoading || isSeriesLoading ? (
+              Array(8)
+                .fill("")
+                .map((e, i) => {
+                  return <Loadingcard index={i} />;
+                })
+            ) : (
+              <>
+                {(isSearching
                   ? [...filteredMovies, ...filteredSeries]
                   : [...movies, ...series]
-                )?.map((e, i) => {
-                  return (
-                    <Card
-                      key={i}
-                      title={e?.Title}
-                      poster={e?.Poster}
-                      year={e?.Year}
-                      index={e?.imdbID}
-                      handleClick={() =>
-                        e.Type === "movie"
-                          ? handleClickMovies(e?.imdbID)
-                          : handleClickSeries(e?.imdbID)
-                      }
-                    />
-                  );
-                })
-              ) : (
-                <div className="no-results">No results found!</div>
-              )}
-            </>
-          )}
+                )?.length > 0 ? (
+                  (isSearching
+                    ? [...filteredMovies, ...filteredSeries]
+                    : [...movies, ...series]
+                  )?.map((e, i) => {
+                    return (
+                      <Card
+                        key={i}
+                        title={e?.Title}
+                        poster={e?.Poster}
+                        year={e?.Year}
+                        index={e?.imdbID}
+                        handleClick={() =>
+                          e.Type === "movie"
+                            ? handleClickMovies(e?.imdbID)
+                            : handleClickSeries(e?.imdbID)
+                        }
+                      />
+                    );
+                  })
+                ) : (
+                  <div className="no-results">No results found!</div>
+                )}
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

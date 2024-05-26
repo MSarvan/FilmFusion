@@ -5,6 +5,7 @@ import { SiSteelseries } from "react-icons/si";
 import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
 import { MainContext } from "../context/MainContext";
+import '../styles/mobilemenu.scss';
 
 const Mobilemenu = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Mobilemenu = () => {
   return (
     <div className="mob-menu">
       <div
-        className="nav-item"
+        className="mob-nav-item"
         onClick={() => {
           navigate("/movies");
           setIsMenuOpen(false);
@@ -35,7 +36,7 @@ const Mobilemenu = () => {
       </div>
 
       <div
-        className="nav-item"
+        className="mob-nav-item"
         onClick={() => {
           navigate("/series");
           setIsMenuOpen(false);
@@ -48,7 +49,7 @@ const Mobilemenu = () => {
       </div>
       
       <div
-        className="nav-item"
+        className="mob-nav-item"
         onClick={() => {
           toggleTheme();
           setIsMenuOpen(false);

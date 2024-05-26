@@ -1,0 +1,21 @@
+.mob-menu {
+  width: 80%;
+  height: calc(100% - 6rem);
+//   border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+
+  .mob-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .icon-div {
+      font-size: 1.5rem;
+      color: teal;
+      display: flex;
+    }
+  }
+}
