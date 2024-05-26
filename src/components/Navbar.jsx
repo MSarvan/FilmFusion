@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/navbar.scss";
 import { FaVideo } from "react-icons/fa6";
 import { MdOndemandVideo } from "react-icons/md";
 import { SiSteelseries } from "react-icons/si";
 import { FaSearch } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
-import { FaBars } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
@@ -20,9 +20,11 @@ const Navbar = () => {
     setSearchParam,
     isSearching,
     setIsSearching,
+    isMenuOpen,
+    setIsMenuOpen,
   } = useContext(MainContext);
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [placeholderText, setPlaceholderText] = useState("Search your favourites..");
 
   const handleSearch = () => {
     setIsSearching(!isSearching);
@@ -31,8 +33,33 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 550) {
+        setPlaceholderText("Search");
+      } else {
+        setPlaceholderText("Search your favourites..");
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="navbar-container">
+      <div
+        className="hamburger-menu"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        {isMenuOpen ? <FaTimes /> : <GiHamburgerMenu />}
+      </div>
+
       <div
         className="nav-item logo-div"
         onClick={() => {
@@ -44,29 +71,7 @@ const Navbar = () => {
         </div>
         <h2>FILMFUSION</h2>
       </div>
-      <div className="nav-item nav-input">
-        <input
-          type="text"
-          placeholder="Search your favourites.."
-          onChange={(e) => {
-            setSearchParam(e.target.value);
-          }}
-          value={searchParam}
-        />
-        <div
-          className="icon-div"
-          onClick={handleSearch}
-          style={{ cursor: "pointer" }}
-        >
-          {isSearching ? <FaTimes /> : <FaSearch />}
-        </div>
-      </div>
-      <div
-        className="hamburger-menu"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-      >
-        {isMenuOpen ? <FaTimes /> : <FaBars />}
-      </div>
+
       <div
         className="nav-item"
         onClick={() => {
@@ -79,6 +84,7 @@ const Navbar = () => {
         </div>
         <div>MOVIES</div>
       </div>
+
       <div
         className="nav-item"
         onClick={() => {
@@ -90,6 +96,24 @@ const Navbar = () => {
           <SiSteelseries />
         </div>
         <div>SERIES</div>
+      </div>
+
+      <div className="nav-item nav-input">
+        <input
+          type="text"
+          placeholder={placeholderText}
+          onChange={(e) => {
+            setSearchParam(e.target.value);
+          }}
+          value={searchParam}
+        />
+        <div
+          className="icon-div"
+          onClick={handleSearch}
+          style={{ cursor: "pointer" }}
+        >
+          {isSearching ? <FaTimes /> : <FaSearch />}
+        </div>
       </div>
 
       <div

@@ -8,6 +8,7 @@ const MainContextProvider = ({ children }) => {
   const [theme, setTheme] = useState("dark-mode");
   const [searchParam, setSearchParam] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleTheme = () => {
     setTheme((prevTheme) =>
@@ -33,6 +34,8 @@ const MainContextProvider = ({ children }) => {
         setSearchParam,
         isSearching,
         setIsSearching,
+        isMenuOpen,
+        setIsMenuOpen,
       }}
     >
       {children}
