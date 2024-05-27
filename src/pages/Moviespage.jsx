@@ -8,10 +8,12 @@ import Card from "../components/Card";
 import Loadingcard from "../components/Loadingcard";
 import { MainContext } from "../context/MainContext";
 import { API_KEY } from "../constant";
+import Mobilemenu from "../components/Mobilemenu";
 
 const Moviespage = () => {
   const navigate = useNavigate();
-  const { setMovieId, searchParam, isSearching, setIsSearching } = useContext(MainContext);
+  const { setMovieId, searchParam, isSearching, setIsSearching, isMenuOpen } =
+    useContext(MainContext);
 
   const [movieData, setMovieData] = useState([]);
   const [page, setPage] = useState(1);
@@ -74,73 +76,77 @@ const Moviespage = () => {
   return (
     <div className="homepage-container">
       <Navbar />
-      <div className="content-area" ref={contentAreaRef}>
-        <div
-          className={
-            isLoading
-              ? "caption-disable"
-              : isSearching
-              ? "caption-disable"
-              : "caption"
-          }
-        >
-          <div className="trend-icon">
-            <FaStar />
+      {isMenuOpen ? (
+        <Mobilemenu />
+      ) : (
+        <div className="content-area" ref={contentAreaRef}>
+          <div
+            className={
+              isLoading
+                ? "caption-disable"
+                : isSearching
+                ? "caption-disable"
+                : "caption"
+            }
+          >
+            <div className="trend-icon">
+              <FaStar />
+            </div>
+            <h2>TOP PICKS FOR YOU</h2>
           </div>
-          <h2>TOP PICKS FOR YOU</h2>
-        </div>
-        <div className="cards-data">
-          {isLoading ? (
-            Array(8)
-              .fill("")
-              .map((e, i) => {
-                return <Loadingcard index={i} />;
-              })
-          ) : (
-            <>
-              {(isSearching ? filteredMovies : movieData)?.length > 0 ? (
-                (isSearching ? filteredMovies : movieData)?.map((e, i) => {
-                  return (
-                    <Card
-                      key={i}
-                      title={e?.Title}
-                      poster={e?.Poster}
-                      year={e?.Year}
-                      index={e?.imdbID}
-                      handleClick={() => handleClick(e?.imdbID)}
-                    />
-                  );
+          <div className="cards-data">
+            {isLoading ? (
+              Array(8)
+                .fill("")
+                .map((e, i) => {
+                  return <Loadingcard index={i} />;
                 })
-              ) : (
-                <div className="no-results">No results found!</div>
-              )}
-            </>
-          )}
-        </div>
-        <div
-          className={
-            isLoading
-              ? "pagination-controls-disable"
-              : isSearching
-              ? "pagination-controls-disable"
-              : "pagination-controls-visible"
-          }
-        >
-          <button
-            onClick={() => setPage(page > 1 ? page - 1 : 1)}
-            disabled={page === 1}
+            ) : (
+              <>
+                {(isSearching ? filteredMovies : movieData)?.length > 0 ? (
+                  (isSearching ? filteredMovies : movieData)?.map((e, i) => {
+                    return (
+                      <Card
+                        key={i}
+                        title={e?.Title}
+                        poster={e?.Poster}
+                        year={e?.Year}
+                        index={e?.imdbID}
+                        handleClick={() => handleClick(e?.imdbID)}
+                      />
+                    );
+                  })
+                ) : (
+                  <div className="no-results">No results found!</div>
+                )}
+              </>
+            )}
+          </div>
+          <div
+            className={
+              isLoading
+                ? "pagination-controls-disable"
+                : isSearching
+                ? "pagination-controls-disable"
+                : "pagination-controls-visible"
+            }
           >
-            Previous
-          </button>
-          <span>{`Page ${page} of ${totalPages}`}</span>
-          <button
-            onClick={() => setPage(page < totalPages ? page + 1 : totalPages)}
-            disabled={page === totalPages}
-          >
-            Next
-          </button>
+            <button
+              onClick={() => setPage(page > 1 ? page - 1 : 1)}
+              disabled={page === 1}
+            >
+              Previous
+            </button>
+            <span>{`Page ${page} of ${totalPages}`}</span>
+            <button
+              onClick={() => setPage(page < totalPages ? page + 1 : totalPages)}
+              disabled={page === totalPages}
+            >
+              Next
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
