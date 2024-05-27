@@ -140,6 +140,11 @@
       .left-area,
       .right-area {
         width: 100%;
+        height: auto;
+      }
+
+      .right-area {
+        overflow-y: unset;
       }
     }
 
@@ -153,7 +158,7 @@
       padding: 1rem;
 
       .right-area {
-        gap: 1rem;
+        gap: 2rem;
 
         .seperator-div div {
           width: 100%;
@@ -168,7 +173,6 @@
       }
 
       .ratings-div .reviewer-div div {
-        flex-direction: column;
         gap: 5px;
       }
     }
