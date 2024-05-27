@@ -41,20 +41,6 @@
     }
   }
 
-  .nav-input {
-    cursor: default;
-    transform: none !important;
-
-    input {
-      padding: 0.5rem 2rem 0.5rem 0.75rem;
-      border-radius: 10px;
-      border: none;
-      font-size: 1rem;
-      font-weight: 500;
-      border: 2px solid var(--secondary-color);
-    }
-  }
-
   @media (max-width: 992px) {
     justify-content: space-between;
     padding: 0 1rem;

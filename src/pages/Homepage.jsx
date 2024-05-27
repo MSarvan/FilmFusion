@@ -9,6 +9,7 @@ import Loadingcard from "../components/Loadingcard";
 import { MainContext } from "../context/MainContext";
 import { API_KEY } from "../constant";
 import Mobilemenu from "../components/Mobilemenu";
+import Search from "../components/Search";
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -100,6 +101,9 @@ const Homepage = () => {
             </div>
             <h2>TRENDING TODAY</h2>
           </div>
+
+          {isMoviesLoading ? "" : isSeriesLoading ? "" : <Search />}
+          
           <div className="cards-data">
             {isMoviesLoading || isSeriesLoading ? (
               Array(8)

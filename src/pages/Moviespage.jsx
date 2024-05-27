@@ -9,6 +9,7 @@ import Loadingcard from "../components/Loadingcard";
 import { MainContext } from "../context/MainContext";
 import { API_KEY } from "../constant";
 import Mobilemenu from "../components/Mobilemenu";
+import Search from "../components/Search";
 
 const Moviespage = () => {
   const navigate = useNavigate();
@@ -94,6 +95,9 @@ const Moviespage = () => {
             </div>
             <h2>TOP PICKS FOR YOU</h2>
           </div>
+
+          {isLoading ? "" : <Search />}
+
           <div className="cards-data">
             {isLoading ? (
               Array(8)

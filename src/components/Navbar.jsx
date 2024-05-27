@@ -98,7 +98,7 @@ const Navbar = () => {
         <div>SERIES</div>
       </div>
 
-      <div className="nav-item nav-input">
+      {/* <div className="nav-item nav-input">
         <input
           type="text"
           placeholder={placeholderText}
@@ -114,7 +114,7 @@ const Navbar = () => {
         >
           {isSearching ? <FaTimes /> : <FaSearch />}
         </div>
-      </div>
+      </div> */}
 
       <div
         className="nav-item"
@@ -126,6 +126,7 @@ const Navbar = () => {
         <div className="icon-div">
           {theme === "light-mode" ? <MdDarkMode /> : <MdLightMode />}
         </div>
+        <div>THEME</div>
       </div>
     </div>
   );

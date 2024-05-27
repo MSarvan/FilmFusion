@@ -9,6 +9,7 @@ import Loadingcard from "../components/Loadingcard";
 import { MainContext } from "../context/MainContext";
 import { API_KEY } from "../constant";
 import Mobilemenu from "../components/Mobilemenu";
+import Search from "../components/Search";
 
 const Seriespage = () => {
   const navigate = useNavigate();
@@ -93,6 +94,9 @@ const Seriespage = () => {
             </div>
             <h2>BINGE-WORTHY SERIES</h2>
           </div>
+
+          {isLoading ? "" : <Search />}
+
           <div className="cards-data">
             {isLoading ? (
               Array(8)
