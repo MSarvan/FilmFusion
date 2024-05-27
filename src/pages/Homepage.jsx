@@ -85,6 +85,8 @@ const Homepage = () => {
         <Mobilemenu />
       ) : (
         <div className="content-area">
+          {isMoviesLoading ? "" : isSeriesLoading ? "" : <Search />}
+          
           <div
             className={
               isMoviesLoading
@@ -101,8 +103,6 @@ const Homepage = () => {
             </div>
             <h2>TRENDING TODAY</h2>
           </div>
-
-          {isMoviesLoading ? "" : isSeriesLoading ? "" : <Search />}
           
           <div className="cards-data">
             {isMoviesLoading || isSeriesLoading ? (

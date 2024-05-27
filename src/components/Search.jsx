@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import { MainContext } from "../context/MainContext";
@@ -12,9 +12,6 @@ const Search = () => {
     setIsSearching,
   } = useContext(MainContext);
 
-  const [placeholderText, setPlaceholderText] = useState(
-    "Search your favourites.."
-  );
   const handleSearch = () => {
     setIsSearching(!isSearching);
     if (isSearching && searchParam?.length > 0) {
@@ -22,29 +19,11 @@ const Search = () => {
     }
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 550) {
-        setPlaceholderText("Search");
-      } else {
-        setPlaceholderText("Search your favourites..");
-      }
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <div className="nav-item nav-input">
       <input
         type="text"
-        placeholder={placeholderText}
+        placeholder='Search your favourites..'
         onChange={(e) => {
           setSearchParam(e.target.value);
         }}

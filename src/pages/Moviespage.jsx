@@ -81,6 +81,8 @@ const Moviespage = () => {
         <Mobilemenu />
       ) : (
         <div className="content-area" ref={contentAreaRef}>
+          {isLoading ? "" : <Search />}
+          
           <div
             className={
               isLoading
@@ -95,8 +97,6 @@ const Moviespage = () => {
             </div>
             <h2>TOP PICKS FOR YOU</h2>
           </div>
-
-          {isLoading ? "" : <Search />}
 
           <div className="cards-data">
             {isLoading ? (

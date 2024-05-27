@@ -80,6 +80,8 @@ const Seriespage = () => {
         <Mobilemenu />
       ) : (
         <div className="content-area" ref={contentAreaRef}>
+          {isLoading ? "" : <Search />}
+
           <div
             className={
               isLoading
@@ -94,8 +96,6 @@ const Seriespage = () => {
             </div>
             <h2>BINGE-WORTHY SERIES</h2>
           </div>
-
-          {isLoading ? "" : <Search />}
 
           <div className="cards-data">
             {isLoading ? (
