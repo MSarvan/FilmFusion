@@ -80,7 +80,7 @@
         gap: 1.5rem;
       }
       .pagination-controls-visible {
-        padding: 1rem;
+        padding: 0;
         button {
           width: 6rem;
         }
@@ -95,7 +95,7 @@
         gap: 1.5rem;
       }
       .pagination-controls-visible {
-        padding: 0.5rem;
+        padding: 0;
         button {
           width: 5rem;
         }
@@ -110,10 +110,11 @@
         gap: 1.5rem;
       }
       .pagination-controls-visible {
-        flex-direction: column;
         gap: 0.5rem;
+        justify-content: space-between;
         button {
-          width: 100%;
+          width: unset;
+          padding: 0.5rem 1rem;
         }
       }
     }

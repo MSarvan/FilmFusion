@@ -48,6 +48,10 @@
           justify-content: flex-start;
           gap: 10px;
         }
+
+        .fw {
+          font-weight: 600;
+        }
       }
 
       .plot-div {
@@ -60,12 +64,20 @@
           align-items: center;
           gap: 4px;
         }
+
+        .fw {
+          font-weight: 600;
+        }
       }
 
       .ratings-div {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+
+        .fw {
+          font-weight: 600;
+        }
 
         .reviewer-div {
           display: flex;

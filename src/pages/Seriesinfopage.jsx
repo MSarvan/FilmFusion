@@ -128,53 +128,53 @@ const Seriesinfopage = () => {
                 <h1>{seriesnfo?.Title}</h1>
                 <div className="seperator-div">
                   <div className="left-div">
-                    <span>📅 Released on:</span>
+                    <span className="fw">📅 Released on:</span>
                     <span>{seriesnfo?.Released}</span>
                   </div>
                   <div className="left-div">
-                    <span>⏰ Runtime:</span>
+                    <span className="fw">⏰ Runtime:</span>
                     <span>{seriesnfo?.Runtime}</span>
                   </div>
                 </div>
                 <div className="seperator-div">
                   <div>
-                    <span>🎭 Genre:</span>
+                    <span className="fw">🎭 Genre:</span>
                     <span>{seriesnfo?.Genre}</span>
                   </div>
                   <div>
-                    <span>🎬 Director:</span>
+                    <span className="fw">🎬 Director:</span>
                     <span>{seriesnfo?.Director}</span>
                   </div>
                 </div>
                 <div className="plot-div">
-                  <span>✍ Writer:</span>
+                  <span className="fw">✍ Writer:</span>
                   <span>{seriesnfo?.Writer}</span>
                 </div>
                 <div className="plot-div">
-                  <span>👨🏻‍🎤 Actors:</span>
+                  <span className="fw">👨🏻‍🎤 Actors:</span>
                   <span>{seriesnfo?.Actors}</span>
                 </div>
                 <div className="plot-div">
-                  <span>
+                  <span className="fw">
                     {" "}
                     <span>📝</span> Plot:
                   </span>
                   <span>{seriesnfo?.Plot}</span>
                 </div>
                 <div className="plot-div">
-                  <span>🔠 Language:</span>
+                  <span className="fw">🔠 Language:</span>
                   <span>{seriesnfo?.Language}</span>
                 </div>
                 <div className="plot-div">
-                  <span>🌍 Country:</span>
+                  <span className="fw">🌍 Country:</span>
                   <span>{seriesnfo?.Country}</span>
                 </div>
                 <div className="plot-div">
-                  <span>🥇 Awards:</span>
+                  <span className="fw">🥇 Awards:</span>
                   <span>{seriesnfo?.Awards}</span>
                 </div>
                 <div className="ratings-div">
-                  <div>🌟 Ratings:</div>
+                  <div className="fw">🌟 Ratings:</div>
                   <div className="reviewer-div">
                     <div>
                       <span>IMdB:</span>
@@ -187,7 +187,7 @@ const Seriesinfopage = () => {
                   </div>
                 </div>
                 <div className="plot-div">
-                  <span>🔢 Total Seasons:</span>
+                  <span className="fw">🔢 Total Seasons:</span>
                   <span>{seriesnfo?.totalSeasons}</span>
                 </div>
                 <div
