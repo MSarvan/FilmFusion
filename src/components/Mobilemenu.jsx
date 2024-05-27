@@ -4,6 +4,7 @@ import { MdOndemandVideo } from "react-icons/md";
 import { SiSteelseries } from "react-icons/si";
 import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
+import { AiFillHome } from "react-icons/ai";
 import { MainContext } from "../context/MainContext";
 import '../styles/mobilemenu.scss';
 
@@ -22,6 +23,19 @@ const Mobilemenu = () => {
 
   return (
     <div className="mob-menu">
+      <div
+        className="mob-nav-item"
+        onClick={() => {
+          navigate("/");
+          setIsMenuOpen(false);
+        }}
+      >
+        <div className="icon-div">
+          <AiFillHome />
+        </div>
+        <div>HOME</div>
+      </div>
+
       <div
         className="mob-nav-item"
         onClick={() => {
