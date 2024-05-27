@@ -113,4 +113,24 @@
       }
     }
   }
+
+  @media (max-width: 375px) {
+    .logo-div {
+      margin-left: 1rem;
+    }
+
+    .nav-input {
+      margin-left: -1rem;
+    }
+  }
+
+  @media (max-width: 325px) {
+    .logo-div {
+      margin-left: 1rem;
+    }
+
+    .nav-input {
+      margin-left: -4rem;
+    }
+  }
 }
