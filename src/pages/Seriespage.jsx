@@ -35,12 +35,15 @@ const Seriespage = () => {
     const fetchSeries = async () => {
       setIsLoading(true);
       try {
-        const seriesResponsePage1 = await fetchData("series", page);
-        const seriesResponsePage2 = await fetchData("series", page + 1);
-        setSeriesData([
+        const seriesResponsePage1 = await fetchData("series", page * 2 - 1);
+        const seriesResponsePage2 = await fetchData("series", page * 2);
+
+        const combinedSeries = [
           ...seriesResponsePage1.Search,
           ...seriesResponsePage2.Search,
-        ]);
+        ]
+        setSeriesData(combinedSeries);
+        
         const totalResults = seriesResponsePage1.totalResults;
         setTotalPages(Math.ceil(totalResults / itemsPerPage));
         setIsLoading(false);

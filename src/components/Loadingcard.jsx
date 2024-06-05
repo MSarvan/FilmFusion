@@ -3,7 +3,7 @@ import "../styles/card.scss";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const Loadingcard = (index) => {
+const Loadingcard = ({index}) => {
   return (
     <div className="each-card" key={index}>
       <div className="img-box">

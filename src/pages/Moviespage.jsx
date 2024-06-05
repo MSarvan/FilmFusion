@@ -35,12 +35,14 @@ const Moviespage = () => {
     const fetchMovies = async () => {
       setIsLoading(true);
       try {
-        const moviesResponsePage1 = await fetchData("movie", page);
-        const moviesResponsePage2 = await fetchData("movie", page + 1);
-        setMovieData([
-          ...moviesResponsePage1.Search,
-          ...moviesResponsePage2.Search,
-        ]);
+        const moviesResponsePage1 = await fetchData("movie", page * 2 - 1);
+        const moviesResponsePage2 = await fetchData("movie", page * 2);
+        
+        const combinedMovies = [
+          ...(moviesResponsePage1.Search || []),
+          ...(moviesResponsePage2.Search || []),
+        ];
+        setMovieData(combinedMovies);
 
         const totalResults = moviesResponsePage1.totalResults;
         setTotalPages(Math.ceil(totalResults / itemsPerPage));
