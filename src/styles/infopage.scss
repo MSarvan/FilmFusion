@@ -23,6 +23,16 @@
         height: 100%;
         max-width: 100%;
       }
+
+      .image-loader {
+        height: 100%;
+        width: 100%;
+
+        span {
+          height: 100%;
+          width: 100%;
+        }
+      }
     }
 
     .right-area {
@@ -106,6 +116,53 @@
           color: var(--primary-color);
         }
       }
+
+      .book-details1 {
+        width: 70%;
+        height: 60px;
+        span {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .book-details2 {
+        width: 100%;
+        height: 35px;
+        span {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .book-details3 {
+        width: 85%;
+        height: 250px;
+        span {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .user-review-heading {
+        width: 200px;
+        height: 40px;
+
+        span {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .user-review-loader {
+        width: 100%;
+        height: 30px;
+
+        span {
+          width: 100%;
+          height: 100%;
+        }
+      }
     }
   }
 
@@ -123,45 +180,100 @@
     }
   }
 
+  @media (max-width: 1030px) {
+    .info-content-area {
+      .right-area {
+        .seperator-div {
+          flex-direction: column;
+          gap: 2rem;
+
+          div {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
   @media (max-width: 992px) {
     .info-content-area {
+      flex-direction: column;
+      align-items: center;
+      overflow-y: scroll;
       padding: 2rem;
+      gap: 2rem;
 
       .left-area {
         width: 100%;
         height: auto;
+        display: flex;
+        justify-content: center;
 
         img {
-          width: 100%;
-          height: auto;
+          height: 40vh;
+        }
+
+        .image-loader {
+          display: flex;
+          height: 30vh;
+          span {
+            height: 100%;
+          }
         }
       }
 
       .right-area {
         width: 100%;
         height: auto;
+        gap: 2rem;
+        align-items: center;
+        overflow-y: initial;
+
+        .seperator-div {
+          width: 100%;
+          flex-direction: column;
+          gap: 1rem;
+          align-items: center;
+
+          div {
+            width: 100%;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+          }
+        }
+
+        .book-details3 {
+          width: 100%;
+          height: 150px;
+        }
+
+        .plot-div {
+          flex-direction: column;
+          gap: 5px;
+          align-items: center;
+
+          span {
+            text-align: center;
+          }
+        }
+
+        .user-review-loader {
+          width: 60%;
+          height: 30px;
+
+          span {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .ratings-div {
+          .reviewer-div {
+            align-items: center;
+          }
+        }
       }
-    }
-  }
-
-  @media (max-width: 768px) {
-    .info-content-area {
-      flex-direction: column;
-      align-items: center;
-
-      .left-area,
-      .right-area {
-        width: 100%;
-        height: auto;
-      }
-
-      .right-area {
-        overflow-y: unset;
-      }
-    }
-
-    .right-area {
-      padding-top: 1rem;
     }
   }
 
@@ -169,19 +281,10 @@
     .info-content-area {
       padding: 1rem;
 
-      .right-area {
-        gap: 2rem;
-
-        .seperator-div div {
-          width: 100%;
-          flex-direction: column;
-          gap: 5px;
+      .left-area {
+        .image-loader {
+          height: 40vh;
         }
-      }
-
-      .plot-div {
-        flex-direction: column;
-        gap: 5px;
       }
 
       .ratings-div .reviewer-div div {

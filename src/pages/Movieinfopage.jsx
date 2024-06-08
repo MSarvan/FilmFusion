@@ -51,72 +51,17 @@ const Movieinfopage = () => {
           {isLoading ? (
             <>
               <div className="left-area">
-                <div style={{ width: "100%", height: "100%" }}>
-                  <Skeleton width={"100%"} height={"100%"} />
-                </div>
+                <Skeleton containerClassName="image-loader" />
               </div>
               <div className="right-area">
-                <div className="seperator-div">
-                  <div className="left-div">
-                    <Skeleton width={100} height={30} />
-                  </div>
-                  <div className="left-div">
-                    <Skeleton width={300} height={30} />
-                  </div>
-                </div>
-                <div className="seperator-div">
-                  <div className="left-div">
-                    <Skeleton width={200} height={30} />
-                  </div>
-                  <div className="left-div">
-                    <Skeleton width={200} height={30} />
-                  </div>
-                </div>
-                <div className="seperator-div">
-                  <div className="left-div">
-                    <Skeleton width={300} height={30} />
-                  </div>
-                  <div className="left-div">
-                    <Skeleton width={100} height={30} />
-                  </div>
-                </div>
-
-                <div className="plot-div">
-                  <div style={{ width: "100%" }}>
-                    <Skeleton width={"100%"} height={100} />
-                  </div>
-                </div>
-
-                <div className="seperator-div">
-                  <div className="left-div">
-                    <Skeleton width={300} height={30} />
-                  </div>
-                  <div className="left-div">
-                    <Skeleton width={100} height={30} />
-                  </div>
-                </div>
-                <div className="seperator-div">
-                  <div className="left-div">
-                    <Skeleton width={200} height={30} />
-                  </div>
-                  <div className="left-div">
-                    <Skeleton width={200} height={30} />
-                  </div>
-                </div>
-                <div className="seperator-div">
-                  <div className="left-div">
-                    <Skeleton width={100} height={30} />
-                  </div>
-                  <div className="left-div">
-                    <Skeleton width={300} height={30} />
-                  </div>
-                </div>
-
-                <div className="plot-div">
-                  <div style={{ width: "100%" }}>
-                    <Skeleton width={"100%"} height={40} />
-                  </div>
-                </div>
+                <Skeleton containerClassName="book-details1" />
+                <Skeleton containerClassName="book-details2" />
+                <Skeleton containerClassName="book-details2" />
+                <Skeleton containerClassName="book-details3" />
+                <Skeleton containerClassName="book-details2" />
+                <Skeleton containerClassName="user-review-heading" />
+                <Skeleton containerClassName="user-review-loader" />
+                <Skeleton width={70} height={25} />
               </div>
             </>
           ) : (
@@ -159,7 +104,7 @@ const Movieinfopage = () => {
                     {" "}
                     <span>📝</span> Plot:
                   </span>
-                  <span>{movieInfo?.Plot}</span>
+                  <span className="description">{movieInfo?.Plot}</span>
                 </div>
                 <div className="plot-div">
                   <span className="fw">🔠 Language:</span>
