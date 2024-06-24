@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import { MainContext } from "../context/MainContext";
@@ -18,6 +18,12 @@ const Search = () => {
       setSearchParam("");
     }
   };
+
+  useEffect(() => {
+    if(searchParam?.length < 1) {
+      setIsSearching(false);
+    }
+  }, [searchParam])
 
   return (
     <div className="nav-item nav-input">
