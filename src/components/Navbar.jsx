@@ -17,6 +17,8 @@ const Navbar = () => {
     toggleTheme,
     isMenuOpen,
     setIsMenuOpen,
+    setSearchParam,
+    setIsSearching,
   } = useContext(MainContext);
 
   return (
@@ -32,6 +34,8 @@ const Navbar = () => {
         className="nav-item logo-div"
         onClick={() => {
           navigate("/");
+          setSearchParam("");
+          setIsSearching(false);
         }}
       >
         <div className="icon-div logo">
@@ -45,6 +49,8 @@ const Navbar = () => {
         onClick={() => {
           navigate("/movies");
           setIsMenuOpen(false);
+          setSearchParam("");
+          setIsSearching(false);
         }}
       >
         <div className="icon-div">
@@ -58,6 +64,8 @@ const Navbar = () => {
         onClick={() => {
           navigate("/series");
           setIsMenuOpen(false);
+          setSearchParam("");
+          setIsSearching(false);
         }}
       >
         <div className="icon-div">

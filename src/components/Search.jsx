@@ -3,6 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import { MainContext } from "../context/MainContext";
 import '../styles/search.scss';
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Search = () => {
   const {
@@ -11,11 +12,17 @@ const Search = () => {
     isSearching,
     setIsSearching,
   } = useContext(MainContext);
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     setIsSearching(!isSearching);
     if (isSearching && searchParam?.length > 0) {
       setSearchParam("");
+    }
+    if(currentPath.includes('movies')) {
+      navigate(`/movies?search=${searchParam}`)
     }
   };
 

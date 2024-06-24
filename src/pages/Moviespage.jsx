@@ -26,7 +26,9 @@ const Moviespage = () => {
 
   const fetchData = async (type, page) => {
     const response = await axios.get(
-      `https://www.omdbapi.com/?s=${type}&type=${type}&page=${page}&apikey=${API_KEY}`
+      `https://www.omdbapi.com/?s=${
+        searchParam?.length > 0 ? searchParam : type
+      }&type=${type}&page=${page}&apikey=${API_KEY}`
     );
     return response.data;
   };
@@ -37,7 +39,7 @@ const Moviespage = () => {
       try {
         const moviesResponsePage1 = await fetchData("movie", page * 2 - 1);
         const moviesResponsePage2 = await fetchData("movie", page * 2);
-        
+
         const combinedMovies = [
           ...(moviesResponsePage1.Search || []),
           ...(moviesResponsePage2.Search || []),
@@ -54,7 +56,7 @@ const Moviespage = () => {
     };
 
     fetchMovies();
-  }, [page]);
+  }, [page, isSearching]);
 
   useEffect(() => {
     if (contentAreaRef.current) {
@@ -72,10 +74,6 @@ const Moviespage = () => {
     setIsSearching(false);
   };
 
-  const filteredMovies = movieData?.filter((entry) =>
-    entry?.Title?.toLowerCase().includes(searchParam?.toLowerCase())
-  );
-
   return (
     <div className="homepage-container">
       <Navbar />
@@ -84,7 +82,7 @@ const Moviespage = () => {
       ) : (
         <div className="content-area" ref={contentAreaRef}>
           {isLoading ? "" : <Search />}
-          
+
           <div
             className={
               isLoading
@@ -109,8 +107,8 @@ const Moviespage = () => {
                 })
             ) : (
               <>
-                {(isSearching ? filteredMovies : movieData)?.length > 0 ? (
-                  (isSearching ? filteredMovies : movieData)?.map((e, i) => {
+                {movieData?.length > 0 ? (
+                  movieData?.map((e, i) => {
                     return (
                       <Card
                         key={i}
@@ -131,8 +129,6 @@ const Moviespage = () => {
           <div
             className={
               isLoading
-                ? "pagination-controls-disable"
-                : isSearching
                 ? "pagination-controls-disable"
                 : "pagination-controls-visible"
             }
