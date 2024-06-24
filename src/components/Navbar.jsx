@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "../styles/navbar.scss";
 import { FaVideo } from "react-icons/fa6";
 import { MdOndemandVideo } from "react-icons/md";
 import { SiSteelseries } from "react-icons/si";
-import { FaSearch } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
@@ -16,43 +15,12 @@ const Navbar = () => {
   const {
     theme,
     toggleTheme,
-    searchParam,
-    setSearchParam,
-    isSearching,
-    setIsSearching,
     isMenuOpen,
     setIsMenuOpen,
   } = useContext(MainContext);
 
-  const [placeholderText, setPlaceholderText] = useState("Search your favourites..");
-
-  const handleSearch = () => {
-    setIsSearching(!isSearching);
-    if (isSearching && searchParam?.length > 0) {
-      setSearchParam("");
-    }
-  };
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 550) {
-        setPlaceholderText("Search");
-      } else {
-        setPlaceholderText("Search your favourites..");
-      }
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
-    <div className="navbar-container">
+    <nav className="navbar-container">
       <div
         className="hamburger-menu"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -98,24 +66,6 @@ const Navbar = () => {
         <div>SERIES</div>
       </div>
 
-      {/* <div className="nav-item nav-input">
-        <input
-          type="text"
-          placeholder={placeholderText}
-          onChange={(e) => {
-            setSearchParam(e.target.value);
-          }}
-          value={searchParam}
-        />
-        <div
-          className="icon-div"
-          onClick={handleSearch}
-          style={{ cursor: "pointer" }}
-        >
-          {isSearching ? <FaTimes /> : <FaSearch />}
-        </div>
-      </div> */}
-
       <div
         className="nav-item"
         onClick={() => {
@@ -128,7 +78,7 @@ const Navbar = () => {
         </div>
         <div>THEME</div>
       </div>
-    </div>
+    </nav>
   );
 };
 
