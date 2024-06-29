@@ -13,11 +13,16 @@ import Search from "../components/Search";
 
 const Seriespage = () => {
   const navigate = useNavigate();
-  const { setSeriesId, isMenuOpen } = useContext(MainContext);
+  const {
+    setSeriesId,
+    isMenuOpen,
+    seriesSearchParam,
+    setSeriesSearchParam,
+    isSeriesSearching,
+    setSeriesSearching,
+  } = useContext(MainContext);
 
   const [seriesData, setSeriesData] = useState([]);
-  const [seriesSearchParam, setSeriesSearchParam] = useState("");
-  const [isSeriesSearching, setSeriesSearching] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 20;

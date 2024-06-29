@@ -13,11 +13,16 @@ import Search from "../components/Search";
 
 const Moviespage = () => {
   const navigate = useNavigate();
-  const { setMovieId, isMenuOpen } = useContext(MainContext);
+  const {
+    setMovieId,
+    isMenuOpen,
+    movieSearchParam,
+    setMovieSearchParam,
+    isMovieSearching,
+    setIsMovieSearching,
+  } = useContext(MainContext);
 
   const [movieData, setMovieData] = useState([]);
-  const [searchParam, setSearchParam] = useState("");
-  const [isSearching, setIsSearching] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 20;
@@ -30,7 +35,11 @@ const Moviespage = () => {
   const fetchData = async (type, page) => {
     const response = await axios.get(
       `https://www.omdbapi.com/?s=${
-        searchQuery ? searchQuery : searchParam?.length > 0 ? searchParam : type
+        searchQuery
+          ? searchQuery
+          : movieSearchParam?.length > 0
+          ? movieSearchParam
+          : type
       }&type=${type}&page=${page}&apikey=${API_KEY}`
     );
     return response.data;
@@ -59,7 +68,7 @@ const Moviespage = () => {
     };
 
     fetchMovies();
-  }, [page, isSearching]);
+  }, [page, isMovieSearching]);
 
   useEffect(() => {
     if (contentAreaRef.current) {
@@ -74,25 +83,27 @@ const Moviespage = () => {
     navigate(`/movies/${id}`);
     setMovieId(id);
     localStorage.setItem("movie id", id);
-    setIsSearching(false);
+    setIsMovieSearching(false);
   };
 
   const handleSearch = () => {
-    setIsSearching(!isSearching);
-    if (isSearching && searchParam?.length > 0) {
-      setSearchParam("");
+    setIsMovieSearching(!isMovieSearching);
+    if (isMovieSearching && movieSearchParam?.length > 0) {
+      setMovieSearchParam("");
       navigate("/movies");
-    } else if (searchQuery || searchParam) {
-      navigate(`/movies?search=${searchQuery ? searchQuery : searchParam}`);
+    } else if (searchQuery || movieSearchParam) {
+      navigate(
+        `/movies?search=${searchQuery ? searchQuery : movieSearchParam}`
+      );
     }
   };
 
   useEffect(() => {
     if (searchQuery) {
-      setSearchParam(searchQuery);
-      setIsSearching(true);
+      setMovieSearchParam(searchQuery);
+      setIsMovieSearching(true);
     } else {
-      setIsSearching(false);
+      setIsMovieSearching(false);
     }
   }, [searchParams]);
 
@@ -107,10 +118,10 @@ const Moviespage = () => {
             ""
           ) : (
             <Search
-              stateVal={searchParam}
-              stateFun={setSearchParam}
-              loadingState={isSearching}
-              loadingFunc={setIsSearching}
+              stateVal={movieSearchParam}
+              stateFun={setMovieSearchParam}
+              loadingState={isMovieSearching}
+              loadingFunc={setIsMovieSearching}
               handleSearch={handleSearch}
             />
           )}
@@ -119,7 +130,7 @@ const Moviespage = () => {
             className={
               isLoading
                 ? "caption-disable"
-                : isSearching
+                : isMovieSearching
                 ? "caption-disable"
                 : "caption"
             }

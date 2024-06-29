@@ -17,8 +17,14 @@ const Navbar = () => {
     toggleTheme,
     isMenuOpen,
     setIsMenuOpen,
-    setSearchParam,
-    setIsSearching,
+    
+    // movies page states
+    setMovieSearchParam,
+    setIsMovieSearching,
+
+    //series page states
+    setSeriesSearchParam,
+    setSeriesSearching,
   } = useContext(MainContext);
 
   return (
@@ -34,8 +40,10 @@ const Navbar = () => {
         className="nav-item logo-div"
         onClick={() => {
           navigate("/");
-          setSearchParam("");
-          setIsSearching(false);
+          setMovieSearchParam("");
+          setSeriesSearchParam('');
+          setIsMovieSearching(false);
+          setSeriesSearching(false);
         }}
       >
         <div className="icon-div logo">
@@ -48,9 +56,10 @@ const Navbar = () => {
         className="nav-item"
         onClick={() => {
           navigate("/movies");
-          setIsMenuOpen(false);
-          setSearchParam("");
-          setIsSearching(false);
+          setMovieSearchParam("");
+          setSeriesSearchParam('');
+          setIsMovieSearching(false);
+          setSeriesSearching(false);
         }}
       >
         <div className="icon-div">
@@ -63,9 +72,10 @@ const Navbar = () => {
         className="nav-item"
         onClick={() => {
           navigate("/series");
-          setIsMenuOpen(false);
-          setSearchParam("");
-          setIsSearching(false);
+          setMovieSearchParam("");
+          setSeriesSearchParam('');
+          setIsMovieSearching(false);
+          setSeriesSearching(false);
         }}
       >
         <div className="icon-div">

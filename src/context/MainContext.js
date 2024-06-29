@@ -8,6 +8,14 @@ const MainContextProvider = ({ children }) => {
   const [theme, setTheme] = useState("dark-mode");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // movies page states
+  const [movieSearchParam, setMovieSearchParam] = useState("");
+  const [isMovieSearching, setIsMovieSearching] = useState(false);
+
+  //series page states
+  const [seriesSearchParam, setSeriesSearchParam] = useState("");
+  const [isSeriesSearching, setSeriesSearching] = useState(false);
+
   const toggleTheme = () => {
     setTheme((prevTheme) =>
       prevTheme === "dark-mode" ? "light-mode" : "dark-mode"
@@ -30,6 +38,18 @@ const MainContextProvider = ({ children }) => {
         toggleTheme,
         isMenuOpen,
         setIsMenuOpen,
+        
+        // movies page states
+        movieSearchParam,
+        setMovieSearchParam,
+        isMovieSearching,
+        setIsMovieSearching,
+
+        //series page states
+        seriesSearchParam,
+        setSeriesSearchParam,
+        isSeriesSearching,
+        setSeriesSearching,
       }}
     >
       {children}
