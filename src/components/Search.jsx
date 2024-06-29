@@ -2,52 +2,46 @@ import React, { useContext, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import { MainContext } from "../context/MainContext";
-import '../styles/search.scss';
-// import { useLocation, useNavigate } from 'react-router-dom'
+import "../styles/search.scss";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const Search = () => {
-  const {
-    searchParam,
-    setSearchParam,
-    isSearching,
-    setIsSearching,
-  } = useContext(MainContext);
-  // const location = useLocation();
-  // const currentPath = location.pathname;
-  // const navigate = useNavigate();
+const Search = ({ stateVal, stateFun, loadingState, loadingFunc, handleSearch }) => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const navigate = useNavigate();
 
-  const handleSearch = () => {
-    setIsSearching(!isSearching);
-    if (isSearching && searchParam?.length > 0) {
-      setSearchParam("");
-    }
-    // if(currentPath.includes('movies')) {
-    //   navigate(`/movies?search=${searchParam}`)
-    // }
-  };
+  // const handleSearch = () => {
+  //   loadingFunc(!loadingState);
+  //   if (loadingState && stateVal?.length > 0) {
+  //     stateFun("");
+  //   }
+  //   if (currentPath.includes("movies")) {
+  //     navigate(`/movies?search=${stateVal}`);
+  //   }
+  // };
 
   useEffect(() => {
-    if(searchParam?.length < 1) {
-      setIsSearching(false);
+    if (stateVal?.length < 1) {
+      loadingFunc(false);
     }
-  }, [searchParam])
+  }, [stateVal]);
 
   return (
     <div className="nav-item nav-input">
       <input
         type="text"
-        placeholder='Search your favourites..'
+        placeholder="Search your favourites.."
         onChange={(e) => {
-          setSearchParam(e.target.value);
+          stateFun(e.target.value);
         }}
-        value={searchParam}
+        value={stateVal}
       />
       <div
         className="icon-div"
         onClick={handleSearch}
         style={{ cursor: "pointer" }}
       >
-        {isSearching ? <FaTimes /> : <FaSearch />}
+        {loadingState ? <FaTimes /> : <FaSearch />}
       </div>
     </div>
   );

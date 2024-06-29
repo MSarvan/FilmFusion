@@ -2,7 +2,12 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import "../styles/homepage.scss";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import {
+  useNavigate,
+  useParams,
+  useSearchParams,
+  useLocation,
+} from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import Card from "../components/Card";
 import Loadingcard from "../components/Loadingcard";
@@ -13,14 +18,28 @@ import Search from "../components/Search";
 
 const Moviespage = () => {
   const navigate = useNavigate();
-  const { setMovieId, searchParam, isSearching, setIsSearching, isMenuOpen } =
-    useContext(MainContext);
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const {
+    setMovieId,
+    searchParam,
+    isSearching,
+    setIsSearching,
+    isMenuOpen,
+    setSearchParam,
+  } = useContext(MainContext);
 
   const [movieData, setMovieData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 20;
   const [isLoading, setIsLoading] = useState(true);
+  const [searchParams] = useSearchParams();
+  // Get the 'search' query parameter
+  const searchQuery = searchParams.get("search");
+
+  // You can also log the full query string if needed
+  // console.log(searchQuery, "searchQuery");
 
   const contentAreaRef = useRef(null);
 
@@ -74,6 +93,16 @@ const Moviespage = () => {
     setIsSearching(false);
   };
 
+  const handleSearch = () => {
+    setIsSearching(!isSearching);
+    if (isSearching && searchParam?.length > 0) {
+      setSearchParam("");
+      navigate('/movies');
+    } else if (searchQuery) {
+      navigate(`/movies?search=${searchParam}`);
+    }
+  };
+
   return (
     <div className="homepage-container">
       <Navbar />
@@ -81,7 +110,17 @@ const Moviespage = () => {
         <Mobilemenu />
       ) : (
         <div className="content-area" ref={contentAreaRef}>
-          {isLoading ? "" : <Search />}
+          {isLoading ? (
+            ""
+          ) : (
+            <Search
+              stateVal={searchParam}
+              stateFun={setSearchParam}
+              loadingState={isSearching}
+              loadingFunc={setIsSearching}
+              handleSearch={handleSearch}
+            />
+          )}
 
           <div
             className={
