@@ -3,22 +3,8 @@ import { FaSearch } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import { MainContext } from "../context/MainContext";
 import "../styles/search.scss";
-import { useLocation, useNavigate } from "react-router-dom";
 
 const Search = ({ stateVal, stateFun, loadingState, loadingFunc, handleSearch }) => {
-  const location = useLocation();
-  const currentPath = location.pathname;
-  const navigate = useNavigate();
-
-  // const handleSearch = () => {
-  //   loadingFunc(!loadingState);
-  //   if (loadingState && stateVal?.length > 0) {
-  //     stateFun("");
-  //   }
-  //   if (currentPath.includes("movies")) {
-  //     navigate(`/movies?search=${stateVal}`);
-  //   }
-  // };
 
   useEffect(() => {
     if (stateVal?.length < 1) {

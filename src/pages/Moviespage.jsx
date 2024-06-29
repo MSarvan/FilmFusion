@@ -2,12 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import "../styles/homepage.scss";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import {
-  useNavigate,
-  useParams,
-  useSearchParams,
-  useLocation,
-} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import Card from "../components/Card";
 import Loadingcard from "../components/Loadingcard";
@@ -18,8 +13,6 @@ import Search from "../components/Search";
 
 const Moviespage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const currentPath = location.pathname;
   const {
     setMovieId,
     searchParam,
@@ -35,18 +28,14 @@ const Moviespage = () => {
   const itemsPerPage = 20;
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams] = useSearchParams();
-  // Get the 'search' query parameter
   const searchQuery = searchParams.get("search");
-
-  // You can also log the full query string if needed
-  // console.log(searchQuery, "searchQuery");
 
   const contentAreaRef = useRef(null);
 
   const fetchData = async (type, page) => {
     const response = await axios.get(
       `https://www.omdbapi.com/?s=${
-        searchParam?.length > 0 ? searchParam : type
+        searchQuery ? searchQuery : searchParam?.length > 0 ? searchParam : type
       }&type=${type}&page=${page}&apikey=${API_KEY}`
     );
     return response.data;
@@ -97,11 +86,20 @@ const Moviespage = () => {
     setIsSearching(!isSearching);
     if (isSearching && searchParam?.length > 0) {
       setSearchParam("");
-      navigate('/movies');
-    } else if (searchQuery) {
-      navigate(`/movies?search=${searchParam}`);
-    }
+      navigate("/movies");
+    } else if (searchQuery || searchParam) {
+      navigate(`/movies?search=${searchQuery ? searchQuery : searchParam}`);
+    } 
   };
+
+  useEffect(() => {
+    if (searchQuery) {
+      setSearchParam(searchQuery);
+      setIsSearching(true);
+    } else {
+      setIsSearching(false);
+    }
+  }, [searchParams]);
 
   return (
     <div className="homepage-container">
@@ -142,7 +140,7 @@ const Moviespage = () => {
               Array(8)
                 .fill("")
                 .map((e, i) => {
-                  return <Loadingcard index={i} />;
+                  return <Loadingcard key={i} />;
                 })
             ) : (
               <>

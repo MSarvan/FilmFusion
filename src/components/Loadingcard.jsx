@@ -3,9 +3,9 @@ import "../styles/card.scss";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const Loadingcard = ({index}) => {
+const Loadingcard = () => {
   return (
-    <div className="each-card" key={index}>
+    <div className="each-card">
       <div className="img-box">
         <Skeleton />
       </div>
