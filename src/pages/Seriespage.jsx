@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import "../styles/homepage.scss";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import Card from "../components/Card";
 import Loadingcard from "../components/Loadingcard";
@@ -13,20 +13,29 @@ import Search from "../components/Search";
 
 const Seriespage = () => {
   const navigate = useNavigate();
-  const { setSeriesId, searchParam, isSearching, setIsSearching, isMenuOpen } =
-    useContext(MainContext);
+  const { setSeriesId, isMenuOpen } = useContext(MainContext);
 
   const [seriesData, setSeriesData] = useState([]);
+  const [seriesSearchParam, setSeriesSearchParam] = useState("");
+  const [isSeriesSearching, setSeriesSearching] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 20;
   const [isLoading, setIsLoading] = useState(true);
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search");
 
   const contentAreaRef = useRef(null);
 
   const fetchData = async (type, page) => {
     const response = await axios.get(
-      `https://www.omdbapi.com/?s=${type}&type=${type}&page=${page}&apikey=${API_KEY}`
+      `https://www.omdbapi.com/?s=${
+        searchQuery
+          ? searchQuery
+          : seriesSearchParam?.length > 0
+          ? seriesSearchParam
+          : type
+      }&type=${type}&page=${page}&apikey=${API_KEY}`
     );
     return response.data;
   };
@@ -41,9 +50,9 @@ const Seriespage = () => {
         const combinedSeries = [
           ...seriesResponsePage1.Search,
           ...seriesResponsePage2.Search,
-        ]
+        ];
         setSeriesData(combinedSeries);
-        
+
         const totalResults = seriesResponsePage1.totalResults;
         setTotalPages(Math.ceil(totalResults / itemsPerPage));
         setIsLoading(false);
@@ -54,7 +63,7 @@ const Seriespage = () => {
     };
 
     fetchSeries();
-  }, [page]);
+  }, [page, isSeriesSearching]);
 
   useEffect(() => {
     if (contentAreaRef.current) {
@@ -69,12 +78,29 @@ const Seriespage = () => {
     navigate(`/series/${id}`);
     setSeriesId(id);
     localStorage.setItem("series id", id);
-    setIsSearching(false);
+    setSeriesSearching(false);
   };
 
-  const filteredSeries = seriesData?.filter((entry) =>
-    entry?.Title?.toLowerCase().includes(searchParam?.toLowerCase())
-  );
+  const handleSearch = () => {
+    setSeriesSearching(!isSeriesSearching);
+    if (isSeriesSearching && seriesSearchParam?.length > 0) {
+      setSeriesSearchParam("");
+      navigate("/series");
+    } else if (searchQuery || seriesSearchParam) {
+      navigate(
+        `/series?search=${searchQuery ? searchQuery : seriesSearchParam}`
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (searchQuery) {
+      setSeriesSearchParam(searchQuery);
+      setSeriesSearching(true);
+    } else {
+      setSeriesSearching(false);
+    }
+  }, [searchParams]);
 
   return (
     <div className="homepage-container">
@@ -83,13 +109,23 @@ const Seriespage = () => {
         <Mobilemenu />
       ) : (
         <div className="content-area" ref={contentAreaRef}>
-          {isLoading ? "" : <Search />}
+          {isLoading ? (
+            ""
+          ) : (
+            <Search
+              stateVal={seriesSearchParam}
+              stateFun={setSeriesSearchParam}
+              loadingState={isSeriesSearching}
+              loadingFunc={setSeriesSearching}
+              handleSearch={handleSearch}
+            />
+          )}
 
           <div
             className={
               isLoading
                 ? "caption-disable"
-                : isSearching
+                : isSeriesSearching
                 ? "caption-disable"
                 : "caption"
             }
@@ -109,8 +145,8 @@ const Seriespage = () => {
                 })
             ) : (
               <>
-                {(isSearching ? filteredSeries : seriesData)?.length > 0 ? (
-                  (isSearching ? filteredSeries : seriesData)?.map((e, i) => {
+                {seriesData?.length > 0 ? (
+                  seriesData?.map((e, i) => {
                     return (
                       <Card
                         key={i}
@@ -132,7 +168,7 @@ const Seriespage = () => {
             className={
               isLoading
                 ? "pagination-controls-disable"
-                : isSearching
+                : seriesData?.length < 1
                 ? "pagination-controls-disable"
                 : "pagination-controls-visible"
             }

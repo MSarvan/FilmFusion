@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
-import { MainContext } from "../context/MainContext";
 import "../styles/search.scss";
 
 const Search = ({ stateVal, stateFun, loadingState, loadingFunc, handleSearch }) => {

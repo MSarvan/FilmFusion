@@ -13,16 +13,11 @@ import Search from "../components/Search";
 
 const Moviespage = () => {
   const navigate = useNavigate();
-  const {
-    setMovieId,
-    searchParam,
-    isSearching,
-    setIsSearching,
-    isMenuOpen,
-    setSearchParam,
-  } = useContext(MainContext);
+  const { setMovieId, isMenuOpen } = useContext(MainContext);
 
   const [movieData, setMovieData] = useState([]);
+  const [searchParam, setSearchParam] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 20;
@@ -89,7 +84,7 @@ const Moviespage = () => {
       navigate("/movies");
     } else if (searchQuery || searchParam) {
       navigate(`/movies?search=${searchQuery ? searchQuery : searchParam}`);
-    } 
+    }
   };
 
   useEffect(() => {
@@ -166,6 +161,8 @@ const Moviespage = () => {
           <div
             className={
               isLoading
+                ? "pagination-controls-disable"
+                : movieData?.length < 1
                 ? "pagination-controls-disable"
                 : "pagination-controls-visible"
             }

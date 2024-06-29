@@ -6,8 +6,6 @@ const MainContextProvider = ({ children }) => {
   const [movieId, setMovieId] = useState("");
   const [seriesId, setSeriesId] = useState("");
   const [theme, setTheme] = useState("dark-mode");
-  const [searchParam, setSearchParam] = useState("");
-  const [isSearching, setIsSearching] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleTheme = () => {
@@ -30,10 +28,6 @@ const MainContextProvider = ({ children }) => {
         theme,
         setTheme,
         toggleTheme,
-        searchParam,
-        setSearchParam,
-        isSearching,
-        setIsSearching,
         isMenuOpen,
         setIsMenuOpen,
       }}
